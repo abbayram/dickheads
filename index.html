@@ -89,11 +89,12 @@
             visibility: visible;
             opacity: 1;
         }
-        .hero-bg{
-  background:url('assets/images/hero.png') center/cover no-repeat;
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-        }
+    /* optional: den reinen Farbverlauf beibehalten */
+.animated-bg {
+    background: linear-gradient(-45deg,#f59e0b,#fcd34d,#f97316,#fb923c);
+    background-size:400% 400%;
+    animation:gradient 15s ease infinite;
+}
         @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -187,6 +188,15 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero-bg py-20 relative">
+<!-- Responsive Hero-Bild -->
+<picture class="absolute inset-0 -z-10">
+    <!-- große Version ab 1024 px -->
+    <source srcset="assets/images/hero-1440.jpg" media="(min-width: 1024px)">
+    <!-- Fallback + Mobile -->
+    <img src="assets/images/hero-720.jpg"
+         alt="DickCraft Hero Artwork"
+         class="w-full h-full object-cover">
+</picture>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center relative z-10">
                 <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">Kunst mit <span class="art-font">Eiern</span></h1>
