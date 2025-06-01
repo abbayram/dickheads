@@ -2,92 +2,97 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dickheads & Candicks - Kunst mit Eiern</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .category-tab.active {
-            border-bottom: 3px solid #F59E0B;
-            color: #F59E0B;
-        }
-        .art-font {
-            font-family: 'Caveat', cursive;
-        }
-        .product-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #F59E0B;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            z-index: 10;
-        }
-        .bg-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f59e0b' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        .art-divider {
-            height: 5px;
-            background: linear-gradient(90deg, transparent, #F59E0B, transparent);
-            margin: 2rem auto;
-            width: 80%;
-            opacity: 0.7;
-        }
-        .cursor-hand {
-            cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.9998 5.99999C11.9998 5.06086 12.3687 4.16034 13.0252 3.50392C13.6816 2.8475 14.5821 2.47858 15.5212 2.47858C16.4603 2.47858 17.3608 2.8475 18.0173 3.50392C18.6737 4.16034 19.0426 5.06086 19.0426 5.99999V15.36L25.7998 12.48C26.2094 12.3202 26.6574 12.2906 27.0854 12.3951C27.5133 12.4996 27.9008 12.7333 28.1998 13.0667C28.4988 13.3956 28.6916 13.8107 28.7511 14.254C28.8107 14.6973 28.7344 15.1484 28.5332 15.5467L23.1012 27.4133C22.4439 28.8089 21.3856 29.9747 20.0668 30.7662C18.748 31.5578 17.2254 31.9442 15.6798 31.88H9.35977C7.88491 31.88 6.47002 31.2943 5.4198 30.2441C4.36959 29.1938 3.78381 27.7789 3.78381 26.304V17.592C3.78381 16.1171 4.36959 14.7022 5.4198 13.6519C6.47002 12.6017 7.88491 12.016 9.35977 12.016H10.5998C10.9312 12.016 11.2491 12.1476 11.4805 12.3826C11.712 12.6175 11.8425 12.9407 11.8425 13.2773V18.024L11.9998 18.08V5.99999Z' stroke='%23F59E0B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"), pointer;
-        }
-        .artist-signature {
-            font-family: 'Caveat', cursive;
-            font-size: 1.5rem;
-            color: #4B5563;
-            transform: rotate(-5deg);
-            display: inline-block;
-        }
-        .color-theme {
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 5px;
-            cursor: pointer;
-            border: 2px solid white;
-        }
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 120px;
-            background-color: black;
-            color: white;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -60px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dickheads & Candicks - Kunst mit Eiern</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+font-family: 'Poppins', sans-serif;
+overflow-x: hidden;
+}
+.product-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.category-tab.active {
+border-bottom: 3px solid #F59E0B;
+color: #F59E0B;
+}
+.art-font {
+font-family: 'Caveat', cursive;
+}
+.product-badge {
+position: absolute;
+top: 10px;
+right: 10px;
+background: #F59E0B;
+color: white;
+padding: 0.25rem 0.75rem;
+border-radius: 9999px;
+font-size: 0.75rem;
+font-weight: bold;
+z-index: 10;
+}
+.bg-pattern {
+background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f59e0b' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.art-divider {
+height: 5px;
+background: linear-gradient(90deg, transparent, #F59E0B, transparent);
+margin: 2rem auto;
+width: 80%;
+opacity: 0.7;
+}
+.cursor-hand {
+cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.9998 5.99999C11.9998 5.06086 12.3687 4.16034 13.0252 3.50392C13.6816 2.8475 14.5821 2.47858 15.5212 2.47858C16.4603 2.47858 17.3608 2.8475 18.0173 3.50392C18.6737 4.16034 19.0426 5.06086 19.0426 5.99999V15.36L25.7998 12.48C26.2094 12.3202 26.6574 12.2906 27.0854 12.3951C27.5133 12.4996 27.9008 12.7333 28.1998 13.0667C28.4988 13.3956 28.6916 13.8107 28.7511 14.254C28.8107 14.6973 28.7344 15.1484 28.5332 15.5467L23.1012 27.4133C22.4439 28.8089 21.3856 29.9747 20.0668 30.7662C18.748 31.5578 17.2254 31.9442 15.6798 31.88H9.35977C7.88491 31.88 6.47002 31.2943 5.4198 30.2441C4.36959 29.1938 3.78381 27.7789 3.78381 26.304V17.592C3.78381 16.1171 4.36959 14.7022 5.4198 13.6519C6.47002 12.6017 7.88491 12.016 9.35977 12.016H10.5998C10.9312 12.016 11.2491 12.1476 11.4805 12.3826C11.712 12.6175 11.8425 12.9407 11.8425 13.2773V18.024L11.9998 18.08V5.99999Z' stroke='%23F59E0B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"), pointer;
+}
+.artist-signature {
+font-family: 'Caveat', cursive;
+font-size: 1.5rem;
+color: #4B5563;
+transform: rotate(-5deg);
+display: inline-block;
+}
+.color-theme {
+width: 25px;
+height: 25px;
+border-radius: 50%;
+display: inline-block;
+margin: 0 5px;
+cursor: pointer;
+border: 2px solid white;
+}
+.tooltip {
+position: relative;
+display: inline-block;
+}
+.tooltip .tooltiptext {
+visibility: hidden;
+width: 120px;
+background-color: black;
+color: white;
+text-align: center;
+border-radius: 6px;
+padding: 5px;
+position: absolute;
+z-index: 1;
+bottom: 125%;
+left: 50%;
+margin-left: -60px;
+opacity: 0;
+transition: opacity 0.3s;
+}
+.tooltip:hover .tooltiptext {
+visibility: visible;
+opacity: 1;
+}
+        .hero-bg{
+  background:url('assets/images/hero.png') center/cover no-repeat;
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
         }
     /* optional: den reinen Farbverlauf beibehalten */
 .animated-bg {
@@ -95,100 +100,99 @@
     background-size:400% 400%;
     animation:gradient 15s ease infinite;
 }
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .custom-checkbox {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-        }
-        .custom-checkbox input {
-            display: none;
-        }
-        .checkmark {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #F59E0B;
-            border-radius: 4px;
-            margin-right: 10px;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .custom-checkbox input:checked + .checkmark:after {
-            content: '\f00c';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            color: #F59E0B;
-            font-size: 12px;
-        }
-        .gallery-thumb {
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-        }
-        .gallery-thumb.active {
-            border-color: #F59E0B;
-        }
-        .star-rating {
-            color: #F59E0B;
-        }
-        .product-tag {
-            display: inline-block;
-            background-color: rgba(245, 158, 11, 0.1);
-            color: #F59E0B;
-            padding: 0.25rem 0.5rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            margin: 0.25rem;
-        }
-    </style>
+@keyframes gradient {
+0% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+100% { background-position: 0% 50%; }
+}
+.custom-checkbox {
+display: flex;
+align-items: center;
+margin-bottom: 0.5rem;
+cursor: pointer;
+}
+.custom-checkbox input {
+display: none;
+}
+.checkmark {
+width: 20px;
+height: 20px;
+border: 2px solid #F59E0B;
+border-radius: 4px;
+margin-right: 10px;
+display: inline-flex;
+justify-content: center;
+align-items: center;
+}
+.custom-checkbox input:checked + .checkmark:after {
+content: '\f00c';
+font-family: 'Font Awesome 5 Free';
+font-weight: 900;
+color: #F59E0B;
+font-size: 12px;
+}
+.gallery-thumb {
+cursor: pointer;
+border: 2px solid transparent;
+transition: all 0.3s;
+}
+.gallery-thumb.active {
+border-color: #F59E0B;
+}
+.star-rating {
+color: #F59E0B;
+}
+.product-tag {
+display: inline-block;
+background-color: rgba(245, 158, 11, 0.1);
+color: #F59E0B;
+padding: 0.25rem 0.5rem;
+border-radius: 9999px;
+font-size: 0.75rem;
+margin: 0.25rem;
+}
+</style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="text-2xl font-bold text-amber-500 flex items-center">
-                        <i class="fas fa-paint-brush mr-2"></i>
-                        <span>Dick<span class="art-font">Craft</span></span>
-                    </div>
-                    <div class="hidden md:ml-10 md:flex md:space-x-8">
-                        <a href="#home" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Home</a>
-                        <a href="#dickheads" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Dickheads</a>
-                        <a href="#candicks" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Candicks</a>
-                        <a href="#about" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Über uns</a>
-                        <a href="#faq" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">FAQ</a>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <button class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
-                        <i class="fas fa-search text-gray-600"></i>
-                    </button>
-                    <div class="ml-4 relative">
-                        <button class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
-                            <i class="fas fa-shopping-cart text-gray-600"></i>
-                            <span class="absolute top-0 right-0 bg-amber-500 text-xs text-white rounded-full w-4 h-4 flex items-center justify-center">0</span>
-                        </button>
-                    </div>
-                    <div class="ml-4">
-                        <button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md">
-                            <i class="fas fa-user mr-1"></i> Login
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+<!-- Navigation -->
+<nav class="bg-white shadow-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16">
+<div class="flex items-center">
+<div class="text-2xl font-bold text-amber-500 flex items-center">
+<i class="fas fa-paint-brush mr-2"></i>
+<span>Dick<span class="art-font">Craft</span></span>
+</div>
+<div class="hidden md:ml-10 md:flex md:space-x-8">
+<a href="#home" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Home</a>
+<a href="#dickheads" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Dickheads</a>
+<a href="#candicks" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Candicks</a>
+<a href="#about" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Über uns</a>
+<a href="#faq" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">FAQ</a>
+</div>
+</div>
+<div class="flex items-center">
+<button class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
+<i class="fas fa-search text-gray-600"></i>
+</button>
+<div class="ml-4 relative">
+<button class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
+<i class="fas fa-shopping-cart text-gray-600"></i>
+<span class="absolute top-0 right-0 bg-amber-500 text-xs text-white rounded-full w-4 h-4 flex items-center justify-center">0</span>
+</button>
+</div>
+<div class="ml-4">
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md">
+<i class="fas fa-user mr-1"></i> Login
+</button>
+</div>
+</div>
+</div>
+</div>
+</nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-bg py-20 relative">
-<div class="absolute inset-0 bg-black/60"></div>
+<!-- Hero Section -->
+<section id="home" class="hero-bg py-20 relative">
 <!-- Responsive Hero-Bild -->
 <picture class="absolute inset-0 -z-10">
     <!-- große Version ab 1024 px -->
@@ -198,1307 +202,1300 @@
          alt="DickCraft Hero Artwork"
          class="w-full h-full object-cover">
 </picture>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
-        <h1 class="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg">
-            Kunst mit <span class="art-font text-amber-300">Eiern</span>
-        </h1>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center relative z-10">
+<h1 class="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">Kunst mit <span class="art-font">Eiern</span></h1>
+<p class="text-xl text-white mb-10 max-w-2xl mx-auto">Unsere Figuren stehen kerzengerade, sind handbemalt und tragen mehr Persönlichkeit als ein Bewerbungsgespräch – ein Fest für Augen, Hände und Hirn.
 
-        <p class="text-xl md:text-2xl text-white/90 mt-6 mb-10 max-w-2xl mx-auto drop-shadow">
-            Unsere Figuren stehen kerzengerade, sind handbemalt …
-        </p>
-
-        <!-- Buttons unverändert -->
-    </div>
-</section>
-                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#dickheads" class="bg-white text-amber-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100 shadow-lg transform hover:scale-105 transition duration-200">
-                        <i class="fas fa-cube mr-2"></i> Dickheads Kollektion
-                    </a>
-                    <a href="#candicks" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-amber-600 shadow-lg transform hover:scale-105 transition duration-200">
-                        <i class="fas fa-fire mr-2"></i> Candicks entdecken
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="h-16 w-full">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-current text-gray-50"></path>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Featured Products Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center mb-10">
-                <h2 class="text-3xl font-bold text-gray-900">Saftige <span class="text-amber-500 art-font">Highlights</span></h2>
-                <div class="flex items-center">
-                    <button class="text-amber-500 hover:text-amber-600 mr-2">
-                        <i class="fas fa-chevron-left text-xl"></i>
-                    </button>
-                    <button class="text-amber-500 hover:text-amber-600">
-                        <i class="fas fa-chevron-right text-xl"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Featured Product 1 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
-                    <div class="product-badge">NEU</div>
-                    <div class="h-64 bg-gray-100 flex items-center justify-center relative overflow-hidden">
-                        <div class="text-7xl text-gray-300 transform transition-transform duration-300 hover:scale-110">
-                            <i class="fas fa-images"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center">
-                            <div class="star-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half"></i>
-                                <span class="text-gray-600 text-sm ml-1">(42)</span>
-                            </div>
-                            <div>
-                                <span class="product-tag">Limitiert</span>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-3">Artist Edition Dick</h3>
-                        <p class="text-gray-600 mt-2">Handgemalt, detailverliebt und garantiert steif im Charakter – diese Dickheads stehen für kompromisslose Kreativität mit einem Augenzwinkern.</p>
-                        <div class="mt-3 flex flex-wrap">
-                            <span class="product-tag"><i class="fas fa-paint-brush mr-1"></i> Handgemalt</span>
-                            <span class="product-tag"><i class="fas fa-certificate mr-1"></i> Premium</span>
-                        </div>
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-amber-500 font-bold text-xl">€34,99</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md flex items-center">
-                                <i class="fas fa-cart-plus mr-2"></i> Ab in die Hose
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Featured Product 2 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
-                    <div class="product-badge bg-red-500">-20%</div>
-                    <div class="h-64 bg-gray-100 flex items-center justify-center relative overflow-hidden">
-                        <div class="text-7xl text-gray-300 transform transition-transform duration-300 hover:scale-110">
-                            <i class="fas fa-images"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center">
-                            <div class="star-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span class="text-gray-600 text-sm ml-1">(38)</span>
-                            </div>
-                            <div>
-                                <span class="product-tag bg-red-100 text-red-500">Sale</span>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-3">Superhero Dick Set</h3>
-                        <p class="text-gray-600 mt-2">Held im harten Einsatz – cape inklusive</p>
-                        <div class="mt-3 flex flex-wrap">
-                            <span class="product-tag"><i class="fas fa-box mr-1"></i> Set</span>
-                            <span class="product-tag"><i class="fas fa-mask mr-1"></i> Superhelden</span>
-                        </div>
-                        <div class="flex justify-between items-center mt-4">
-                            <div>
-                                <span class="text-gray-500 line-through mr-2">€59,99</span>
-                                <span class="text-amber-500 font-bold text-xl">€47,99</span>
-                            </div>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md flex items-center">
-                                <i class="fas fa-cart-plus mr-2"></i> Ab in die Hose
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Featured Product 3 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
-                    <div class="product-badge bg-purple-500">Bestseller</div>
-                    <div class="h-64 bg-gray-100 flex items-center justify-center relative overflow-hidden">
-                        <div class="text-7xl text-gray-300 transform transition-transform duration-300 hover:scale-110">
-                            <i class="fas fa-images"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center">
-                            <div class="star-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="text-gray-600 text-sm ml-1">(125)</span>
-                            </div>
-                            <div>
-                                <span class="product-tag bg-purple-100 text-purple-500">Top</span>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mt-3">Rainbow Scented Candick</h3>
-                        <p class="text-gray-600 mt-2">Mehrfarbige Duftkerze mit 7 verschiedenen Düften und 60h Brennzeit</p>
-                        <div class="mt-3 flex flex-wrap">
-                            <span class="product-tag"><i class="fas fa-fire mr-1"></i> Lang brennend</span>
-                            <span class="product-tag"><i class="fas fa-magic mr-1"></i> Multi-Aroma</span>
-                        </div>
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-amber-500 font-bold text-xl">€29,99</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md flex items-center">
-                                <i class="fas fa-cart-plus mr-2"></i> Ab in die Hose
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Payment Methods -->
-    <section class="py-10 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="sr-only">Zahlungsmethoden</h2>
-            <div class="flex flex-wrap justify-center items-center space-x-4 sm:space-x-8">
-                <div class="text-center mb-4">
-                    <i class="fab fa-stripe text-4xl text-gray-700"></i>
-                    <p class="mt-2 text-gray-600">Stripe</p>
-                </div>
-                <div class="text-center mb-4">
-                    <i class="fab fa-paypal text-4xl text-gray-700"></i>
-                    <p class="mt-2 text-gray-600">PayPal</p>
-                </div>
-                <div class="text-center mb-4">
-                    <i class="fab fa-apple-pay text-4xl text-gray-700"></i>
-                    <p class="mt-2 text-gray-600">Apple Pay</p>
-                </div>
-                <div class="text-center mb-4">
-                    <i class="fab fa-google-pay text-4xl text-gray-700"></i>
-                    <p class="mt-2 text-gray-600">Google Pay</p>
-                </div>
-                <div class="text-center mb-4">
-                    <i class="fas fa-credit-card text-4xl text-gray-700"></i>
-                    <p class="mt-2 text-gray-600">Kreditkarte</p>
-                </div>
-                <div class="text-center mb-4">
-                    <i class="fas fa-university text-4xl text-gray-700"></i>
-                    <p class="mt-2 text-gray-600">Überweisung</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Art Process Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Unser <span class="text-amber-500 art-font">Schöpfungsakt    
-    </span></h2>
-            <p class="text-lg text-center text-gray-600 mb-12 max-w-3xl mx-auto">Von der ersten Skizze bis zur finalen Erektion aus PLA – jede Figur entsteht mit harter Hingabe und einer Prise frecher Fantasie.</p>
-            
-            <div class="flex flex-col md:flex-row justify-between items-center md:space-x-8">
-                <div class="md:w-1/4 text-center mb-8 md:mb-0">
-                    <div class="bg-white p-6 rounded-lg shadow-md h-full">
-                        <div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-pencil-ruler text-3xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">1. 1. Vorspiel</h3>
-                        <p class="text-gray-600">Mit fester Hand skizzieren wir jede Kurve, bis der Entwurf richtig Lust macht auf mehr.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="hidden md:block text-amber-500 text-2xl">
-                    <i class="fas fa-long-arrow-alt-right"></i>
-                </div>
-                
-                <div class="md:w-1/4 text-center mb-8 md:mb-0">
-                    <div class="bg-white p-6 rounded-lg shadow-md h-full">
-                        <div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-print text-3xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">2. Hart im Druck</h3>
-                        <p class="text-gray-600">Unsere Printer pumpen Schicht für Schicht, bis die Form steif vor Details steht.
 </p>
-                    </div>
-                </div>
-                
-                <div class="hidden md:block text-amber-500 text-2xl">
-                    <i class="fas fa-long-arrow-alt-right"></i>
-                </div>
-                
-                <div class="md:w-1/4 text-center mb-8 md:mb-0">
-                    <div class="bg-white p-6 rounded-lg shadow-md h-full">
-                        <div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-paint-brush text-3xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">3. Handarbeit</h3>
-                        <p class="text-gray-600">Hier kommt Farbe ins Spiel – wir streicheln jede Kontur, bis dein Dickhead glänzt wie frisch poliert.
-</p>
-                    </div>
-                </div>
-                
-                <div class="hidden md:block text-amber-500 text-2xl">
-                    <i class="fas fa-long-arrow-alt-right"></i>
-                </div>
-                
-                <div class="md:w-1/4 text-center">
-                    <div class="bg-white p-6 rounded-lg shadow-md h-full">
-                        <div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-box text-3xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-3">4. Verpackung</h3>
-                        <p class="text-gray-600">Wir schnüren jeden Dick sorgfältig ein, damit er unversehrt und steif bei dir ankommt.
-</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="art-divider"></div>
-
-    <!-- Dickheads Enhanced Section -->
-    <section id="dickheads" class="py-16 bg-pattern">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
-                <div>
-                    <h2 class="text-4xl font-bold text-gray-900 mb-2"> <span class="text-amber-500 art-font">Die steife Dickheads-Parade
-</span> </h2>
-                    <p class="text-lg text-gray-600">3D-gedruckt, handbemalt & voller Charakter – jeder steht hier seinen Mann.
-</p>
-                </div>
-                <div class="flex flex-wrap mt-4 md:mt-0">
-                    <button class="category-tab active px-4 py-2 mr-2 mb-2">Alle</button>
-                    <button class="category-tab px-4 py-2 mr-2 mb-2">Superhelden</button>
-                    <button class="category-tab px-4 py-2 mr-2 mb-2">Sport</button>
-                    <button class="category-tab px-4 py-2 mr-2 mb-2">Fantasy</button>
-                    <button class="category-tab px-4 py-2 mr-2 mb-2">Künstler-Edition</button>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Featured Product Detail -->
-                <div class="lg:col-span-2 row-span-2 bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 product-card">
-                    <div class="lg:flex">
-                        <div class="lg:w-1/2">
-                            <div class="h-80 bg-gray-100 flex items-center justify-center relative overflow-hidden">
-                                <div class="text-7xl text-gray-300 transform transition-transform duration-300 hover:scale-110">
-                                    <i class="fas fa-images"></i>
-                                </div>
-                            </div>
-                            <div class="p-4 flex space-x-2">
-                                <div class="w-16 h-16 bg-gray-200 rounded gallery-thumb active flex items-center justify-center">
-                                    <i class="fas fa-image text-gray-400"></i>
-                                </div>
-                                <div class="w-16 h-16 bg-gray-200 rounded gallery-thumb flex items-center justify-center">
-                                    <i class="fas fa-image text-gray-400"></i>
-                                </div>
-                                <div class="w-16 h-16 bg-gray-200 rounded gallery-thumb flex items-center justify-center">
-                                    <i class="fas fa-image text-gray-400"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="lg:w-1/2 p-6">
-                            <span class="product-tag bg-purple-100 text-purple-500">Premium</span>
-                            <span class="product-tag">Champion</span>
-                            
-                            <h3 class="text-2xl font-bold text-gray-900 mt-3">Olympischer Dick-us Maximus
-</h3>
-                            <div class="star-rating mt-1">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half"></i>
-                                <span class="text-gray-600 text-sm ml-1">(87)</span>
-                            </div>
-                            <p class="text-gray-600 mt-3">Unser Gold-Stück! Muskelhart, schweißglänzend – bereit, den Podest-Pfosten zu erklimmen.
-</p>
-                            
-                            <div class="mt-4">
-                                <p class="font-semibold text-gray-700">Farbe wählen:</p>
-                                <div class="flex mt-2">
-                                    <div class="color-theme bg-amber-500 border-amber-600"></div>
-                                    <div class="color-theme bg-blue-500 border-blue-600"></div>
-                                    <div class="color-theme bg-red-500 border-red-600"></div>
-                                    <div class="color-theme bg-purple-500 border-purple-600"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-4">
-                                <p class="font-semibold text-gray-700">Größe:</p>
-                                <div class="flex mt-2 space-x-2">
-                                    <button class="px-3 py-1 border-2 border-amber-500 text-amber-500 rounded-md">S</button>
-                                    <button class="px-3 py-1 border-2 border-gray-200 text-gray-600 rounded-md">M</button>
-                                    <button class="px-3 py-1 border-2 border-gray-200 text-gray-600 rounded-md">L</button>
-                                </div>
-                            </div>
-                            
-                            <div class="flex justify-between items-center mt-6">
-                                <span class="text-amber-500 font-bold text-2xl">€28,99</span>
-                                <div class="flex items-center">
-                                    <div class="mr-3">
-                                        <label class="sr-only">Menge</label>
-                                        <input type="number" min="1" value="1" class="w-14 border border-gray-300 rounded px-2 py-1 text-center">
-                                    </div>
-                                    <button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md flex items-center">
-                                        <i class="fas fa-cart-plus mr-2"></i> Ab in die Hose
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-6 text-gray-600 text-sm">
-                                <p><i class="fas fa-truck mr-2"></i> Kostenloser Versand ab €50</p>
-                                <p class="mt-1"><i class="fas fa-shield-alt mr-2"></i> 30 Tage Rückgaberecht</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 1 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
-                    <div class="h-56 bg-gray-100 flex items-center justify-center">
-                        <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Ballerina Dick-tator</h3>
-                        <div class="star-rating mt-1 text-sm">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p class="text-gray-600 mt-2">Anmutig auf Spitze – aber untenrum bombenfest.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-amber-500 font-bold text-xl">€24,99</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
-                                <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 2 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
-                    <div class="h-56 bg-gray-100 flex items-center justify-center">
-                        <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Sprinter-Schwengel</h3>
-                        <div class="star-rating mt-1 text-sm">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p class="text-gray-600 mt-2">Immer ein Stück voraus – auch ohne Startblock.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-amber-500 font-bold text-xl">€22,99</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
-                                <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 3 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
-                    <div class="h-56 bg-gray-100 flex items-center justify-center">
-                        <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Cape-Capone</h3>
-                        <div class="star-rating mt-1 text-sm">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="text-gray-600 mt-2">Rettet täglich die Laune – egal, wie steif die Lage ist.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-amber-500 font-bold text-xl">€26,99</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
-                                <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 4 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
-                    <div class="h-56 bg-gray-100 flex items-center justify-center">
-                        <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Fantasy Dick</h3>
-                        <div class="star-rating mt-1 text-sm">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p class="text-gray-600 mt-2">Bereit, Drachen zu bezwingen – und Blicke gleich mit.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-amber-500 font-bold text-xl">€25,99</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
-                                <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 5 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
-                    <div class="h-56 bg-gray-100 flex items-center justify-center">
-                        <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Hang-Ten-Hengst</h3>
-                        <div class="star-rating mt-1 text-sm">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p class="text-gray-600 mt-2">Reitet jede Welle, als wär’s ’ne Liebeserklärung.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-amber-500 font-bold text-xl">€24,99</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
-                                <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- New Products -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
-                    <div class="h-56 bg-gray-100 flex items-center justify-center">
-                        <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">DJ Dick</h3>
-                        <div class="star-rating mt-1 text-sm">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p class="text-gray-600 mt-2">Legt Beats auf, bis alle Nadel hart tanzt.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-amber-500 font-bold text-xl">€27,99</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
-                                <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
-                    <div class="product-badge bg-green-500">Neu</div>
-                    <div class="h-56 bg-gray-100 flex items-center justify-center">
-                        <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Orbit-Organ</h3>
-                        <div class="star-rating mt-1 text-sm">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half"></i>
-                        </div>
-                        <p class="text-gray-600 mt-2">Schwebt schwerelos, bleibt aber standhaft.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-amber-500 font-bold text-xl">€29,99</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
-                                <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="#" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-md font-medium inline-flex items-center shadow-md">
-                    Alle Dickheads ansehen
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <div class="art-divider"></div>
-
-    <!-- Candicks Enhanced Section -->
-    <section id="candicks" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
-                <div>
-                    <h2 class="text-4xl font-bold text-gray-900 mb-2">Die <span class="text-amber-500 art-font">Candicks Lichtershow</span> </h2>
-                    <p class="text-lg text-gray-600">Handgefertigte Kerzen, die jeden Raum mit Charakter erleuchten</p>
-                </div>
-                <div class="flex flex-wrap mt-4 md:mt-0">
-                    <button class="category-tab active px-4 py-2 mr-2 mb-2">Alle</button>
-                    <button class="category-tab px-4 py-2 mr-2 mb-2">Duft-Dicks</button>
-                    <button class="category-tab px-4 py-2 mr-2 mb-2">Bunt-Brummer</button>
-                    <button class="category-tab px-4 py-2 mr-2 mb-2">Seasonal Dudes</button>
-                    <button class="category-tab px-4 py-2 mr-2 mb-2">Geschenk-Gockel</button>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Candle Categories -->
-               <div class="rounded-lg overflow-hidden shadow-md col-span-1 bg-gradient-to-br from-amber-500 to-amber-600 text-white p-8">
-    <h3 class="text-2xl font-bold mb-6 text-black">Entdecke heiß gegossene Schätzchen, die mehr Tropfen versprechen als ein Liebesroman. </h3>
-    <ul class="space-y-4 text-black">
-        <li class="flex items-center">
-            <i class="fas fa-check-circle mr-3"></i>
-            <span>100% natürliches Wachs – null Gummi, alles echt.
-</span>
-        </li>
-        <li class="flex items-center">
-            <i class="fas fa-check-circle mr-3"></i>
-            <span>Mehr Ausdauer als jeder Mann - bis zu 60 Stunden Brennzeit</span>
-        </li>
-        <li class="flex items-center">
-            <i class="fas fa-check-circle mr-3"></i>
-            <span>Grün im Herzen, heiß an der Spitze.
- - Umweltfreundliche Materialien</span>
-        </li>
-        <li class="flex items-center">
-            <i class="fas fa-check-circle mr-3"></i>
-            <span>Mit Liebe gegossen & geglättet, bis jede Rundung sitzt.</span>
-        </li>
-        <li class="flex items-center">
-            <i class="fas fa-check-circle mr-3"></i>
-            <span>Premium Duftstoffe</span>
-        </li>
-    </ul>
-    <div class="mt-8 text-black">
-        <label class="block text-lg font-medium mb-3">Filter nach Duft:</label>
-        <div>
-            <label class="custom-checkbox">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-                Virgin Vanilla
-            </label>
-            <label class="custom-checkbox">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-                Scharfer Zimt­schwung
-            </label>
-            <label class="custom-checkbox">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-                Frucht-Cocktail 
-            </label>
-            <label class="custom-checkbox">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-                Holzige Noten
-            </label>
-            <label class="custom-checkbox">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-                Blumen-Bouquet
-            </label>
-        </div>
-    </div>
+<div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+<a href="#dickheads" class="bg-white text-amber-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100 shadow-lg transform hover:scale-105 transition duration-200">
+<i class="fas fa-cube mr-2"></i> Dickheads Kollektion
+</a>
+<a href="#candicks" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-amber-600 shadow-lg transform hover:scale-105 transition duration-200">
+<i class="fas fa-fire mr-2"></i> Candicks entdecken
+</a>
 </div>
-                
-                <div class="col-span-1 md:col-span-2">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Candle 1 -->
-                        <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
-                            <div class="h-48 bg-gray-100 flex items-center justify-center">
-                                <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="text-lg font-semibold text-gray-900">Flaming Dick</h3>
-                                <div class="star-rating mt-1 text-xs">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div class="flex items-center mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-fire-alt mr-1"></i>
-                                    <span>40h Brennzeit</span>
-                                    <span class="mx-2">|</span>
-                                    <i class="fas fa-leaf mr-1"></i>
-                                    <span>Vanille</span>
-                                </div>
-                                <div class="flex justify-between items-center mt-3">
-                                    <span class="text-amber-500 font-bold">€19,99</span>
-                                    <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
-                                        <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Candle 2 -->
-                        <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
-                            <div class="h-48 bg-gray-100 flex items-center justify-center">
-                                <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="text-lg font-semibold text-gray-900">Scented Dick</h3>
-                                <div class="star-rating mt-1 text-xs">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div class="flex items-center mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-fire-alt mr-1"></i>
-                                    <span>45h Brennzeit</span>
-                                    <span class="mx-2">|</span>
-                                    <i class="fas fa-leaf mr-1"></i>
-                                    <span>Zimt</span>
-                                </div>
-                                <div class="flex justify-between items-center mt-3">
-                                    <span class="text-amber-500 font-bold">€18,99</span>
-                                    <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
-                                        <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Candle 3 -->
-                        <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
-                            <div class="product-badge bg-purple-500">Bestseller</div>
-                            <div class="h-48 bg-gray-100 flex items-center justify-center">
-                                <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="text-lg font-semibold text-gray-900">Rainbow Dick</h3>
-                                <div class="star-rating mt-1 text-xs">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="flex items-center mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-fire-alt mr-1"></i>
-                                    <span>50h Brennzeit</span>
-                                    <span class="mx-2">|</span>
-                                    <i class="fas fa-leaf mr-1"></i>
-                                    <span>Fruchtmix</span>
-                                </div>
-                                <div class="flex justify-between items-center mt-3">
-                                    <span class="text-amber-500 font-bold">€22,99</span>
-                                    <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
-                                        <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Candle 4 -->
-                        <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
-                            <div class="h-48 bg-gray-100 flex items-center justify-center">
-                                <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="text-lg font-semibold text-gray-900">Glitter Dick</h3>
-                                <div class="star-rating mt-1 text-xs">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div class="flex items-center mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-fire-alt mr-1"></i>
-                                    <span>35h Brennzeit</span>
-                                    <span class="mx-2">|</span>
-                                    <i class="fas fa-leaf mr-1"></i>
-                                    <span>Waldaroma</span>
-                                </div>
-                                <div class="flex justify-between items-center mt-3">
-                                    <span class="text-amber-500 font-bold">€24,99</span>
-                                    <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
-                                        <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Candle 5 -->
-                        <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
-                            <div class="h-48 bg-gray-100 flex items-center justify-center">
-                                <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="text-lg font-semibold text-gray-900">Luxury Dick</h3>
-                                <div class="star-rating mt-1 text-xs">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half"></i>
-                                </div>
-                                <div class="flex items-center mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-fire-alt mr-1"></i>
-                                    <span>60h Brennzeit</span>
-                                    <span class="mx-2">|</span>
-                                    <i class="fas fa-leaf mr-1"></i>
-                                    <span>Sandelholz</span>
-                                </div>
-                                <div class="flex justify-between items-center mt-3">
-                                    <span class="text-amber-500 font-bold">€29,99</span>
-                                    <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
-                                        <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Candle 6 -->
-                        <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
-                            <div class="product-badge bg-green-500">Neu</div>
-                            <div class="h-48 bg-gray-100 flex items-center justify-center">
-                                <div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="text-lg font-semibold text-gray-900">Mood Dick</h3>
-                                <div class="star-rating mt-1 text-xs">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="flex items-center mt-2 text-xs text-gray-500">
-                                    <i class="fas fa-fire-alt mr-1"></i>
-                                    <span>50h Brennzeit</span>
-                                    <span class="mx-2">|</span>
-                                    <i class="fas fa-leaf mr-1"></i>
-                                    <span>Lavendel</span>
-                                </div>
-                                <div class="flex justify-between items-center mt-3">
-                                    <span class="text-amber-500 font-bold">€26,99</span>
-                                    <button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
-                                        <i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="#" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-md font-medium inline-flex items-center shadow-md">
-                    Alle Candicks ansehen
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="h-16 w-full">
+<path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-current text-gray-50"></path>
+</svg>
+</div>
+</section>
 
-    <!-- Customer Reviews -->
-    <section class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-gray-900 mb-2 text-center">Kundenstimmen</h2>
-            <p class="text-lg text-center text-gray-600 mb-12">Was unsere Kunden über unsere Produkte sagen</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-md">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <div class="star-rating mb-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h3 class="text-lg font-semibold text-gray-900">Absolut begeistert!</h3>
-                        </div>
-                        <div class="text-amber-500 text-3xl">
-                            <i class="fas fa-quote-right"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">Die Qualität dieser Figuren ist unübertroffen! Die Detailgenauigkeit ist erstaunlich, und sie kommen genau wie abgebildet an. Definitiv ein Hingucker in meiner Sammlung.</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-500">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-gray-900 font-medium">Max M.</p>
-                            <p class="text-gray-500 text-sm">Stammkunde seit 2022</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-md">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <div class="star-rating mb-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <h3 class="text-lg font-semibold text-gray-900">Perfekte Geschenkidee</h3>
-                        </div>
-                        <div class="text-amber-500 text-3xl">
-                            <i class="fas fa-quote-right"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">Habe einen Superhero Dick für meinen Bruder gekauft und er liebt ihn! Der Versand war schnell und die Verpackung sehr sicher. Werde definitiv wieder bestellen.</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-500">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-gray-900 font-medium">Sarah K.</p>
-                            <p class="text-gray-500 text-sm">Bestellt vor 2 Monaten</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-md">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <div class="star-rating mb-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half"></i>
-                            </div>
-                            <h3 class="text-lg font-semibold text-gray-900">Tolle Kerzen</h3>
-                        </div>
-                        <div class="text-amber-500 text-3xl">
-                            <i class="fas fa-quote-right"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">Die Rainbow Candicks sind nicht nur lustig, sondern duften auch fantastisch. Sie brennen gleichmäßig und lange. Ein echter Hingucker auf meiner Geburtstagsparty!</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-500">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-gray-900 font-medium">Thomas L.</p>
-                            <p class="text-gray-500 text-sm">Treuer Kunde</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-10">
-                <a href="#" class="text-amber-500 hover:text-amber-600 font-medium inline-flex items-center">
-                    Alle Bewertungen lesen
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+<!-- Featured Products Section -->
+<section class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center mb-10">
+<h2 class="text-3xl font-bold text-gray-900">Saftige <span class="text-amber-500 art-font">Highlights</span></h2>
+<div class="flex items-center">
+<button class="text-amber-500 hover:text-amber-600 mr-2">
+<i class="fas fa-chevron-left text-xl"></i>
+</button>
+<button class="text-amber-500 hover:text-amber-600">
+<i class="fas fa-chevron-right text-xl"></i>
+</button>
+</div>
+</div>
 
-    <!-- Features Section with Artistic Touch -->
-    <section class="py-16 bg-white relative">
-        <div class="absolute top-0 left-0 w-full h-full bg-pattern opacity-10"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Was uns <span class="text-amber-500 art-font">besonders</span> macht</h2>
-            <p class="text-lg text-center text-gray-600 mb-12 max-w-3xl mx-auto">Wir kombinieren Kunsthandwerk mit Humor, um einzigartige Produkte zu schaffen, die sowohl hochwertig als auch ausdrucksstark sind</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-md text-center border-t-4 border-amber-500">
-                    <div class="text-amber-500 text-4xl mb-6">
-                        <i class="fas fa-print"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Präziser 3D-Druck</h3>
-                    <p class="text-gray-600">Wir verwenden modernste 3D-Drucker für die präzisesten Details und robuste Konstruktionen</p>
-                    <div class="mt-6">
-                        <span class="inline-block artist-signature">Detailgenau</span>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-md text-center border-t-4 border-amber-500">
-                    <div class="text-amber-500 text-4xl mb-6">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Künstlerische Bemalung</h3>
-                    <p class="text-gray-600">Jedes Stück wird von unserem Team talentierter Künstler individuell von Hand bemalt</p>
-                    <div class="mt-6">
-                        <span class="inline-block artist-signature">Handarbeit</span>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-md text-center border-t-4 border-amber-500">
-                    <div class="text-amber-500 text-4xl mb-6">
-                        <i class="fas fa-laugh-beam"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Humorvolles Design</h3>
-                    <p class="text-gray-600">Unsere Designs vereinen künstlerischen Wert mit einer Prise Humor für ein Lächeln im Alltag</p>
-                    <div class="mt-6">
-                        <span class="inline-block artist-signature">Mit Liebe gemacht</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-                <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-amber-500">
-                    <div class="flex items-start">
-                        <div class="text-amber-500 text-4xl mr-6">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Umweltbewusstsein</h3>
-                            <p class="text-gray-600">Wir verwenden biologisch abbaubare Materialien für unseren 3D-Druck und nachhaltige Wachse für unsere Kerzen. Unsere Verpackungen sind recycelbar und wir setzen uns für eine umweltfreundliche Produktion ein.</p>
-                            <ul class="mt-4 space-y-2 text-gray-600">
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    PLA-basierte Druckmaterialien
-                                </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    Natürliches Soja- und Bienenwachs
-                                </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    Recycelbare Verpackung
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-amber-500">
-                    <div class="flex items-start">
-                        <div class="text-amber-500 text-4xl mr-6">
-                            <i class="fas fa-gift"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Personalisierung</h3>
-                            <p class="text-gray-600">Machen Sie Ihr Geschenk besonders mit unseren Personalisierungsoptionen. Wir können Namen, Daten oder kurze Botschaften auf die Basis der Figuren oder die Verpackung der Kerzen gravieren.</p>
-                            <div class="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-100">
-                                <h4 class="font-medium text-amber-700 mb-2">Personalisierungsoptionen:</h4>
-                                <p class="text-amber-600 text-sm">Fügen Sie bei der Bestellung einfach Ihre Wunschpersonalisierung hinzu (max. 20 Zeichen). Aufpreis: €5,00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Featured Product 1 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
+<div class="product-badge">NEU</div>
+<div class="h-64 bg-gray-100 flex items-center justify-center relative overflow-hidden">
+<div class="text-7xl text-gray-300 transform transition-transform duration-300 hover:scale-110">
+<i class="fas fa-images"></i>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center">
+<div class="star-rating">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half"></i>
+<span class="text-gray-600 text-sm ml-1">(42)</span>
+</div>
+<div>
+<span class="product-tag">Limitiert</span>
+</div>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mt-3">Artist Edition Dick</h3>
+<p class="text-gray-600 mt-2">Handgemalt, detailverliebt und garantiert steif im Charakter – diese Dickheads stehen für kompromisslose Kreativität mit einem Augenzwinkern.</p>
+<div class="mt-3 flex flex-wrap">
+<span class="product-tag"><i class="fas fa-paint-brush mr-1"></i> Handgemalt</span>
+<span class="product-tag"><i class="fas fa-certificate mr-1"></i> Premium</span>
+</div>
+<div class="flex justify-between items-center mt-4">
+<span class="text-amber-500 font-bold text-xl">€34,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md flex items-center">
+<i class="fas fa-cart-plus mr-2"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Häufig gestellte <span class="text-amber-500 art-font">Fragen</span></h2>
-            <p class="text-lg text-center text-gray-600 mb-12">Antworten auf die wichtigsten Fragen zu unseren Produkten</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
-                        <i class="fas fa-question-circle text-amber-500 mr-3"></i>
-                        Wie pflege ich meine Dickheads Figuren?
-                    </h3>
-                    <p class="text-gray-600">Unsere Figuren lassen sich leicht mit einem weichen, trockenen Tuch abstauben. Für hartnäckigere Verschmutzungen empfehlen wir ein leicht feuchtes Tuch. Vermeiden Sie aggressive Reinigungsmittel, da diese die Bemalung beschädigen können.</p>
-                </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
-                        <i class="fas fa-question-circle text-amber-500 mr-3"></i>
-                        Wie lange brennen die Candicks?
-                    </h3>
-                    <p class="text-gray-600">Unsere Kerzen haben je nach Größe unterschiedliche Brennzeiten. Die Standard-Candicks brennen etwa 35-40 Stunden, während unsere Premium-Linie bis zu 60 Stunden Brennzeit bietet. Für optimale Ergebnisse empfehlen wir, die Kerze beim ersten Gebrauch mindestens 2 Stunden brennen zu lassen.</p>
-                </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
-                        <i class="fas fa-question-circle text-amber-500 mr-3"></i>
-                        Sind die 3D-Figuren bruchfest?
-                    </h3>
-                    <p class="text-gray-600">Unsere Figuren sind aus hochwertigem PLA-Material gefertigt und für den normalen Gebrauch stabil genug. Sie sollten jedoch nicht als Spielzeug verwendet werden und können bei starkem Druck oder Stürzen brechen. Wir empfehlen, sie als Sammlerstücke zu behandeln.</p>
-                </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
-                        <i class="fas fa-question-circle text-amber-500 mr-3"></i>
-                        Kann ich eine Figur in einer bestimmten Farbe bestellen?
-                    </h3>
-                    <p class="text-gray-600">Ja, viele unserer Figuren können in verschiedenen Farben bestellt werden. Bei den Produkten mit Farboptionen können Sie Ihre Wunschfarbe im Bestellprozess auswählen. Für spezielle Farbwünsche kontaktieren Sie uns bitte direkt über unser Kontaktformular.</p>
-                </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
-                        <i class="fas fa-question-circle text-amber-500 mr-3"></i>
-                        Gibt es Rabatte für größere Bestellungen?
-                    </h3>
-                    <p class="text-gray-600">Ja, wir bieten Mengenrabatte für Bestellungen ab 5 Artikeln an. Bei größeren Bestellungen für Events oder als Firmengeschenke kontaktieren Sie uns bitte für ein individuelles Angebot.</p>
-                </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
-                        <i class="fas fa-question-circle text-amber-500 mr-3"></i>
-                        Wie verpackt ihr die Produkte für den Versand?
-                    </h3>
-                    <p class="text-gray-600">Wir verpacken unsere Produkte sorgfältig in umweltfreundlichen Materialien. Die Figuren werden individuell in Seidenpapier gewickelt und in stoßsicheres Material eingebettet. Kerzen werden in hitzebeständigen Behältern verschickt, um ihre Form zu bewahren.</p>
-                </div>
-            </div>
-            
-            <div class="text-center mt-10">
-                <p class="text-gray-600 mb-4">Weitere Fragen? Kontaktieren Sie uns!</p>
-                <a href="#" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-md font-medium inline-flex items-center">
-                    <i class="fas fa-envelope mr-2"></i> Kontaktformular
-                </a>
-            </div>
-        </div>
-    </section>
+<!-- Featured Product 2 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
+<div class="product-badge bg-red-500">-20%</div>
+<div class="h-64 bg-gray-100 flex items-center justify-center relative overflow-hidden">
+<div class="text-7xl text-gray-300 transform transition-transform duration-300 hover:scale-110">
+<i class="fas fa-images"></i>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center">
+<div class="star-rating">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="far fa-star"></i>
+<span class="text-gray-600 text-sm ml-1">(38)</span>
+</div>
+<div>
+<span class="product-tag bg-red-100 text-red-500">Sale</span>
+</div>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mt-3">Superhero Dick Set</h3>
+<p class="text-gray-600 mt-2">Held im harten Einsatz – cape inklusive</p>
+<div class="mt-3 flex flex-wrap">
+<span class="product-tag"><i class="fas fa-box mr-1"></i> Set</span>
+<span class="product-tag"><i class="fas fa-mask mr-1"></i> Superhelden</span>
+</div>
+<div class="flex justify-between items-center mt-4">
+<div>
+<span class="text-gray-500 line-through mr-2">€59,99</span>
+<span class="text-amber-500 font-bold text-xl">€47,99</span>
+</div>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md flex items-center">
+<i class="fas fa-cart-plus mr-2"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
 
-    <!-- About Section Enhanced -->
-    <section id="about" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:flex lg:items-center lg:space-x-12">
-                <div class="lg:w-1/2 mb-8 lg:mb-0">
-                    <div class="relative">
-                        <div class="bg-gray-200 h-96 rounded-lg flex items-center justify-center">
-                            <div class="text-5xl text-gray-400"><i class="fas fa-users"></i></div>
-                        </div>
-                        <div class="absolute -bottom-4 -right-4 bg-amber-500 text-white p-4 rounded-lg shadow-lg transform rotate-3">
-                            <span class="art-font text-xl">Kunst mit Persönlichkeit</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:w-1/2">
-                    <div class="mb-6">
-                        <span class="inline-block py-1 px-3 rounded-full bg-amber-100 text-amber-600 text-sm font-medium mb-2">Unsere Geschichte</span>
-                        <h2 class="text-3xl font-bold text-gray-900">Über <span class="text-amber-500 art-font">DickCraft</span></h2>
-                    </div>
-                    <p class="text-gray-600 mb-6">
-                        Wir sind ein kreatives Team von Künstlern und 3D-Druck-Enthusiasten, die 2019 eine einfache Mission hatten: die Welt ein bisschen lustiger zu machen. Was als Hobby in einer kleinen Werkstatt begann, ist heute ein florierendes Kunstunternehmen mit Kunden in ganz Europa.
-                    </p>
-                    <p class="text-gray-600 mb-6">
-                        Jedes unserer Produkte wird mit Liebe zum Detail entworfen, gedruckt und von Hand bemalt. Von unseren berühmten "Dickheads" Figuren bis zu den stilvollen "Candicks" Kerzen - wir bringen Humor und Kunsthandwerk zusammen, um einzigartige Stücke zu schaffen, die zum Lächeln anregen.
-                    </p>
-                    
-                    <div class="mb-6 p-4 bg-amber-50 rounded-lg border border-amber-100">
-                        <h3 class="font-medium text-gray-900 mb-2">Unser Team</h3>
-                        <p class="text-gray-600 text-sm">
-                            Unser Team besteht aus 12 leidenschaftlichen Künstlern, Designern und Handwerkern, die jeden Tag daran arbeiten, neue und aufregende Produkte zu entwickeln. Wir glauben an Kreativität, Qualität und die Kraft des Humors.
-                        </p>
-                    </div>
-                    
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-amber-500 hover:text-amber-600 tooltip">
-                            <i class="fab fa-instagram text-2xl"></i>
-                            <span class="tooltiptext">Instagram</span>
-                        </a>
-                        <a href="#" class="text-amber-500 hover:text-amber-600 tooltip">
-                            <i class="fab fa-facebook text-2xl"></i>
-                            <span class="tooltiptext">Facebook</span>
-                        </a>
-                        <a href="#" class="text-amber-500 hover:text-amber-600 tooltip">
-                            <i class="fab fa-twitter text-2xl"></i>
-                            <span class="tooltiptext">Twitter</span>
-                        </a>
-                        <a href="#" class="text-amber-500 hover:text-amber-600 tooltip">
-                            <i class="fab fa-tiktok text-2xl"></i>
-                            <span class="tooltiptext">TikTok</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Featured Product 3 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
+<div class="product-badge bg-purple-500">Bestseller</div>
+<div class="h-64 bg-gray-100 flex items-center justify-center relative overflow-hidden">
+<div class="text-7xl text-gray-300 transform transition-transform duration-300 hover:scale-110">
+<i class="fas fa-images"></i>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center">
+<div class="star-rating">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<span class="text-gray-600 text-sm ml-1">(125)</span>
+</div>
+<div>
+<span class="product-tag bg-purple-100 text-purple-500">Top</span>
+</div>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mt-3">Rainbow Scented Candick</h3>
+<p class="text-gray-600 mt-2">Mehrfarbige Duftkerze mit 7 verschiedenen Düften und 60h Brennzeit</p>
+<div class="mt-3 flex flex-wrap">
+<span class="product-tag"><i class="fas fa-fire mr-1"></i> Lang brennend</span>
+<span class="product-tag"><i class="fas fa-magic mr-1"></i> Multi-Aroma</span>
+</div>
+<div class="flex justify-between items-center mt-4">
+<span class="text-amber-500 font-bold text-xl">€29,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md flex items-center">
+<i class="fas fa-cart-plus mr-2"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-    <!-- Newsletter Enhanced -->
-    <section class="py-16 animated-bg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl max-w-4xl mx-auto relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-amber-100 rounded-full -mr-16 -mt-16"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-amber-100 rounded-full -ml-12 -mb-12"></div>
-                
-                <div class="text-center relative z-10">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-3">Verpassen Sie keine Neuigkeiten</h2>
-                    <p class="text-xl text-gray-600 mb-8 max-w-xl mx-auto">Melden Sie sich für unseren Newsletter an und erhalten Sie exklusive Angebote, Neuigkeiten und Inspirationen</p>
-                    
-                    <div class="max-w-md mx-auto">
-                        <form class="flex flex-col sm:flex-row">
-                            <input type="email" placeholder="Ihre E-Mail-Adresse" class="flex-grow px-4 py-3 mb-2 sm:mb-0 sm:mr-2 rounded-md border border-gray-300 focus:outline-none focus:border-amber-500">
-                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-md transform transition hover:scale-105 flex items-center justify-center">
-                                <i class="fas fa-paper-plane mr-2"></i> Abonnieren
-                            </button>
-                        </form>
-                        <p class="text-gray-500 text-xs mt-3">
-                            Durch die Anmeldung stimmen Sie unseren Datenschutzrichtlinien zu. Sie können sich jederzeit abmelden.
-                        </p>
-                    </div>
-                    
-                    <div class="flex justify-center items-center mt-8">
-                        <div class="flex items-center px-4">
-                            <i class="fas fa-tag text-amber-500 mr-2"></i>
-                            <span class="text-gray-700">10% Rabatt</span>
-                        </div>
-                        <div class="border-r border-gray-300 h-6 mx-4"></div>
-                        <div class="flex items-center px-4">
-                            <i class="fas fa-gift text-amber-500 mr-2"></i>
-                            <span class="text-gray-700">Exklusive Angebote</span>
-                        </div>
-                        <div class="border-r border-gray-300 h-6 mx-4"></div>
-                        <div class="flex items-center px-4">
-                            <i class="fas fa-bell text-amber-500 mr-2"></i>
-                            <span class="text-gray-700">Neuheiten</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- Payment Methods -->
+<section class="py-10 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="sr-only">Zahlungsmethoden</h2>
+<div class="flex flex-wrap justify-center items-center space-x-4 sm:space-x-8">
+<div class="text-center mb-4">
+<i class="fab fa-stripe text-4xl text-gray-700"></i>
+<p class="mt-2 text-gray-600">Stripe</p>
+</div>
+<div class="text-center mb-4">
+<i class="fab fa-paypal text-4xl text-gray-700"></i>
+<p class="mt-2 text-gray-600">PayPal</p>
+</div>
+<div class="text-center mb-4">
+<i class="fab fa-apple-pay text-4xl text-gray-700"></i>
+<p class="mt-2 text-gray-600">Apple Pay</p>
+</div>
+<div class="text-center mb-4">
+<i class="fab fa-google-pay text-4xl text-gray-700"></i>
+<p class="mt-2 text-gray-600">Google Pay</p>
+</div>
+<div class="text-center mb-4">
+<i class="fas fa-credit-card text-4xl text-gray-700"></i>
+<p class="mt-2 text-gray-600">Kreditkarte</p>
+</div>
+<div class="text-center mb-4">
+<i class="fas fa-university text-4xl text-gray-700"></i>
+<p class="mt-2 text-gray-600">Überweisung</p>
+</div>
+</div>
+</div>
+</section>
 
-    <!-- Footer Enhanced -->
-    <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-paint-brush text-amber-500 mr-2"></i>
-                        <h3 class="text-xl font-bold text-white">Dick<span class="art-font">Craft</span></h3>
-                    </div>
-                    <p class="mb-4 text-gray-400">Humorvolle 3D-Kunst und Kerzen für alle, die das Besondere lieben. Handgefertigt mit Liebe zum Detail.</p>
-                    <div class="flex space-x-4 mb-6">
-                        <a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-map-marker-alt text-amber-500 mr-2"></i>
-                        <span class="text-gray-400">Berlin, Deutschland</span>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                        <i class="fas fa-shopping-basket text-amber-500 mr-2"></i> Shop
-                    </h3>
-                    <ul class="space-y-2">
-                        <li><a href="#dickheads" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Dickheads Figuren</a></li>
-                        <li><a href="#candicks" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Candicks Kerzen</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Neuheiten</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Bestseller</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Sale</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Geschenkideen</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                        <i class="fas fa-info-circle text-amber-500 mr-2"></i> Service
-                    </h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Kontakt</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Versand & Lieferung</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Rücksendungen</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> FAQ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Größentabelle</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Pflegehinweise</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                        <i class="fas fa-credit-card text-amber-500 mr-2"></i> Zahlungsmethoden
-                    </h3>
-                    <div class="grid grid-cols-3 gap-3 mb-6">
-                        <i class="fab fa-stripe text-2xl text-gray-300"></i>
-                        <i class="fab fa-paypal text-2xl text-gray-300"></i>
-                        <i class="fab fa-apple-pay text-2xl text-gray-300"></i>
-                        <i class="fab fa-google-pay text-2xl text-gray-300"></i>
-                        <i class="fas fa-credit-card text-2xl text-gray-300"></i>
-                        <i class="fas fa-university text-2xl text-gray-300"></i>
-                    </div>
-                    <div class="p-4 bg-gray-800 rounded-lg mt-4">
-                        <h4 class="font-medium text-white mb-2 flex items-center">
-                            <i class="fas fa-headset text-amber-500 mr-2"></i> Kundenservice
-                        </h4>
-                        <p class="text-gray-400 text-sm mb-2">Mo-Fr 9:00-17:00 Uhr</p>
-                        <p class="text-amber-500 font-bold">+49 30 1234567</p>
-                        <a href="/cdn-cgi/l/email-protection#cba2a5ada48bafa2a8a0a8b9aaadbfe5afae" class="text-amber-500 hover:underline"><span class="__cf_email__" data-cfemail="422b2c242d02262b212921302324366c2627">[email&#160;protected]</span></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 mt-12 pt-8">
-                <div class="flex flex-col md:flex-row items-center justify-between">
-                    <p class="text-sm text-gray-500 mb-4 md:mb-0">&copy; 2023 DickCraft. Alle Rechte vorbehalten.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-500 hover:text-amber-500 text-sm">AGB</a>
-                        <a href="#" class="text-gray-500 hover:text-amber-500 text-sm">Datenschutz</a>
-                        <a href="#" class="text-gray-500 hover:text-amber-500 text-sm">Impressum</a>
-                        <a href="#" class="text-gray-500 hover:text-amber-500 text-sm">Cookie-Einstellungen</a>
-                    </div>
-                </div>
-                <div class="text-center mt-4">
-                    <p class="text-xs text-gray-600">Designed with <i class="fas fa-heart text-amber-500"></i> in Berlin</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+<!-- Art Process Section -->
+<section class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Unser <span class="text-amber-500 art-font">Schöpfungsakt    
+</span></h2>
+<p class="text-lg text-center text-gray-600 mb-12 max-w-3xl mx-auto">Von der ersten Skizze bis zur finalen Erektion aus PLA – jede Figur entsteht mit harter Hingabe und einer Prise frecher Fantasie.</p>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Simple cart functionality
-        const addToCartButtons = document.querySelectorAll('button');
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                if (this.innerHTML.includes('Ab in die Hose')) {
-                    alert('Produkt wurde zum Warenkorb hinzugefügt!');
-                }
-            });
-        });
+<div class="flex flex-col md:flex-row justify-between items-center md:space-x-8">
+<div class="md:w-1/4 text-center mb-8 md:mb-0">
+<div class="bg-white p-6 rounded-lg shadow-md h-full">
+<div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
+<i class="fas fa-pencil-ruler text-3xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">1. 1. Vorspiel</h3>
+<p class="text-gray-600">Mit fester Hand skizzieren wir jede Kurve, bis der Entwurf richtig Lust macht auf mehr.
+</p>
+</div>
+</div>
 
-        // Category tabs functionality
-        const categoryTabs = document.querySelectorAll('.category-tab');
-        categoryTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Remove active class from all tabs
-                categoryTabs.forEach(t => t.classList.remove('active'));
-                // Add active class to clicked tab
-                this.classList.add('active');
-            });
-        });
-        
-        // Gallery thumbnails functionality
-        const galleryThumbs = document.querySelectorAll('.gallery-thumb');
-        galleryThumbs.forEach(thumb => {
-            thumb.addEventListener('click', function() {
-                // Remove active class from all thumbs
-                galleryThumbs.forEach(t => t.classList.remove('active'));
-                // Add active class to clicked thumb
-                this.classList.add('active');
-            });
-        });
-    </script>
+<div class="hidden md:block text-amber-500 text-2xl">
+<i class="fas fa-long-arrow-alt-right"></i>
+</div>
+
+<div class="md:w-1/4 text-center mb-8 md:mb-0">
+<div class="bg-white p-6 rounded-lg shadow-md h-full">
+<div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
+<i class="fas fa-print text-3xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">2. Hart im Druck</h3>
+<p class="text-gray-600">Unsere Printer pumpen Schicht für Schicht, bis die Form steif vor Details steht.
+</p>
+</div>
+</div>
+
+<div class="hidden md:block text-amber-500 text-2xl">
+<i class="fas fa-long-arrow-alt-right"></i>
+</div>
+
+<div class="md:w-1/4 text-center mb-8 md:mb-0">
+<div class="bg-white p-6 rounded-lg shadow-md h-full">
+<div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
+<i class="fas fa-paint-brush text-3xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">3. Handarbeit</h3>
+<p class="text-gray-600">Hier kommt Farbe ins Spiel – wir streicheln jede Kontur, bis dein Dickhead glänzt wie frisch poliert.
+</p>
+</div>
+</div>
+
+<div class="hidden md:block text-amber-500 text-2xl">
+<i class="fas fa-long-arrow-alt-right"></i>
+</div>
+
+<div class="md:w-1/4 text-center">
+<div class="bg-white p-6 rounded-lg shadow-md h-full">
+<div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
+<i class="fas fa-box text-3xl"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">4. Verpackung</h3>
+<p class="text-gray-600">Wir schnüren jeden Dick sorgfältig ein, damit er unversehrt und steif bei dir ankommt.
+</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="art-divider"></div>
+
+<!-- Dickheads Enhanced Section -->
+<section id="dickheads" class="py-16 bg-pattern">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-center mb-10">
+<div>
+<h2 class="text-4xl font-bold text-gray-900 mb-2"> <span class="text-amber-500 art-font">Die steife Dickheads-Parade
+</span> </h2>
+<p class="text-lg text-gray-600">3D-gedruckt, handbemalt & voller Charakter – jeder steht hier seinen Mann.
+</p>
+</div>
+<div class="flex flex-wrap mt-4 md:mt-0">
+<button class="category-tab active px-4 py-2 mr-2 mb-2">Alle</button>
+<button class="category-tab px-4 py-2 mr-2 mb-2">Superhelden</button>
+<button class="category-tab px-4 py-2 mr-2 mb-2">Sport</button>
+<button class="category-tab px-4 py-2 mr-2 mb-2">Fantasy</button>
+<button class="category-tab px-4 py-2 mr-2 mb-2">Künstler-Edition</button>
+</div>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Featured Product Detail -->
+<div class="lg:col-span-2 row-span-2 bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 product-card">
+<div class="lg:flex">
+<div class="lg:w-1/2">
+<div class="h-80 bg-gray-100 flex items-center justify-center relative overflow-hidden">
+<div class="text-7xl text-gray-300 transform transition-transform duration-300 hover:scale-110">
+<i class="fas fa-images"></i>
+</div>
+</div>
+<div class="p-4 flex space-x-2">
+<div class="w-16 h-16 bg-gray-200 rounded gallery-thumb active flex items-center justify-center">
+<i class="fas fa-image text-gray-400"></i>
+</div>
+<div class="w-16 h-16 bg-gray-200 rounded gallery-thumb flex items-center justify-center">
+<i class="fas fa-image text-gray-400"></i>
+</div>
+<div class="w-16 h-16 bg-gray-200 rounded gallery-thumb flex items-center justify-center">
+<i class="fas fa-image text-gray-400"></i>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2 p-6">
+<span class="product-tag bg-purple-100 text-purple-500">Premium</span>
+<span class="product-tag">Champion</span>
+
+<h3 class="text-2xl font-bold text-gray-900 mt-3">Olympischer Dick-us Maximus
+</h3>
+<div class="star-rating mt-1">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half"></i>
+<span class="text-gray-600 text-sm ml-1">(87)</span>
+</div>
+<p class="text-gray-600 mt-3">Unser Gold-Stück! Muskelhart, schweißglänzend – bereit, den Podest-Pfosten zu erklimmen.
+</p>
+
+<div class="mt-4">
+<p class="font-semibold text-gray-700">Farbe wählen:</p>
+<div class="flex mt-2">
+<div class="color-theme bg-amber-500 border-amber-600"></div>
+<div class="color-theme bg-blue-500 border-blue-600"></div>
+<div class="color-theme bg-red-500 border-red-600"></div>
+<div class="color-theme bg-purple-500 border-purple-600"></div>
+</div>
+</div>
+
+<div class="mt-4">
+<p class="font-semibold text-gray-700">Größe:</p>
+<div class="flex mt-2 space-x-2">
+<button class="px-3 py-1 border-2 border-amber-500 text-amber-500 rounded-md">S</button>
+<button class="px-3 py-1 border-2 border-gray-200 text-gray-600 rounded-md">M</button>
+<button class="px-3 py-1 border-2 border-gray-200 text-gray-600 rounded-md">L</button>
+</div>
+</div>
+
+<div class="flex justify-between items-center mt-6">
+<span class="text-amber-500 font-bold text-2xl">€28,99</span>
+<div class="flex items-center">
+<div class="mr-3">
+<label class="sr-only">Menge</label>
+<input type="number" min="1" value="1" class="w-14 border border-gray-300 rounded px-2 py-1 text-center">
+</div>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md flex items-center">
+<i class="fas fa-cart-plus mr-2"></i> Ab in die Hose
+</button>
+</div>
+</div>
+
+<div class="mt-6 text-gray-600 text-sm">
+<p><i class="fas fa-truck mr-2"></i> Kostenloser Versand ab €50</p>
+<p class="mt-1"><i class="fas fa-shield-alt mr-2"></i> 30 Tage Rückgaberecht</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Product 1 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
+<div class="h-56 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900">Ballerina Dick-tator</h3>
+<div class="star-rating mt-1 text-sm">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="far fa-star"></i>
+</div>
+<p class="text-gray-600 mt-2">Anmutig auf Spitze – aber untenrum bombenfest.</p>
+<div class="flex justify-between items-center mt-4">
+<span class="text-amber-500 font-bold text-xl">€24,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 2 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
+<div class="h-56 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900">Sprinter-Schwengel</h3>
+<div class="star-rating mt-1 text-sm">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half"></i>
+<i class="far fa-star"></i>
+</div>
+<p class="text-gray-600 mt-2">Immer ein Stück voraus – auch ohne Startblock.</p>
+<div class="flex justify-between items-center mt-4">
+<span class="text-amber-500 font-bold text-xl">€22,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 3 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
+<div class="h-56 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900">Cape-Capone</h3>
+<div class="star-rating mt-1 text-sm">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+<p class="text-gray-600 mt-2">Rettet täglich die Laune – egal, wie steif die Lage ist.</p>
+<div class="flex justify-between items-center mt-4">
+<span class="text-amber-500 font-bold text-xl">€26,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 4 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
+<div class="h-56 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900">Fantasy Dick</h3>
+<div class="star-rating mt-1 text-sm">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="far fa-star"></i>
+</div>
+<p class="text-gray-600 mt-2">Bereit, Drachen zu bezwingen – und Blicke gleich mit.</p>
+<div class="flex justify-between items-center mt-4">
+<span class="text-amber-500 font-bold text-xl">€25,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 5 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
+<div class="h-56 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900">Hang-Ten-Hengst</h3>
+<div class="star-rating mt-1 text-sm">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+</div>
+<p class="text-gray-600 mt-2">Reitet jede Welle, als wär’s ’ne Liebeserklärung.</p>
+<div class="flex justify-between items-center mt-4">
+<span class="text-amber-500 font-bold text-xl">€24,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+
+<!-- New Products -->
+<div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
+<div class="h-56 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900">DJ Dick</h3>
+<div class="star-rating mt-1 text-sm">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="far fa-star"></i>
+<i class="far fa-star"></i>
+</div>
+<p class="text-gray-600 mt-2">Legt Beats auf, bis alle Nadel hart tanzt.</p>
+<div class="flex justify-between items-center mt-4">
+<span class="text-amber-500 font-bold text-xl">€27,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
+<div class="product-badge bg-green-500">Neu</div>
+<div class="h-56 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900">Orbit-Organ</h3>
+<div class="star-rating mt-1 text-sm">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half"></i>
+</div>
+<p class="text-gray-600 mt-2">Schwebt schwerelos, bleibt aber standhaft.</p>
+<div class="flex justify-between items-center mt-4">
+<span class="text-amber-500 font-bold text-xl">€29,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-sm">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="text-center mt-12">
+<a href="#" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-md font-medium inline-flex items-center shadow-md">
+Alle Dickheads ansehen
+<i class="fas fa-arrow-right ml-2"></i>
+</a>
+</div>
+</div>
+</section>
+
+<div class="art-divider"></div>
+
+<!-- Candicks Enhanced Section -->
+<section id="candicks" class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-center mb-10">
+<div>
+<h2 class="text-4xl font-bold text-gray-900 mb-2">Die <span class="text-amber-500 art-font">Candicks Lichtershow</span> </h2>
+<p class="text-lg text-gray-600">Handgefertigte Kerzen, die jeden Raum mit Charakter erleuchten</p>
+</div>
+<div class="flex flex-wrap mt-4 md:mt-0">
+<button class="category-tab active px-4 py-2 mr-2 mb-2">Alle</button>
+<button class="category-tab px-4 py-2 mr-2 mb-2">Duft-Dicks</button>
+<button class="category-tab px-4 py-2 mr-2 mb-2">Bunt-Brummer</button>
+<button class="category-tab px-4 py-2 mr-2 mb-2">Seasonal Dudes</button>
+<button class="category-tab px-4 py-2 mr-2 mb-2">Geschenk-Gockel</button>
+</div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Candle Categories -->
+<div class="rounded-lg overflow-hidden shadow-md col-span-1 bg-gradient-to-br from-amber-500 to-amber-600 text-white p-8">
+<h3 class="text-2xl font-bold mb-6 text-black">Entdecke heiß gegossene Schätzchen, die mehr Tropfen versprechen als ein Liebesroman. </h3>
+<ul class="space-y-4 text-black">
+<li class="flex items-center">
+<i class="fas fa-check-circle mr-3"></i>
+<span>100% natürliches Wachs – null Gummi, alles echt.
+</span>
+</li>
+<li class="flex items-center">
+<i class="fas fa-check-circle mr-3"></i>
+<span>Mehr Ausdauer als jeder Mann - bis zu 60 Stunden Brennzeit</span>
+</li>
+<li class="flex items-center">
+<i class="fas fa-check-circle mr-3"></i>
+<span>Grün im Herzen, heiß an der Spitze.
+- Umweltfreundliche Materialien</span>
+</li>
+<li class="flex items-center">
+<i class="fas fa-check-circle mr-3"></i>
+<span>Mit Liebe gegossen & geglättet, bis jede Rundung sitzt.</span>
+</li>
+<li class="flex items-center">
+<i class="fas fa-check-circle mr-3"></i>
+<span>Premium Duftstoffe</span>
+</li>
+</ul>
+<div class="mt-8 text-black">
+<label class="block text-lg font-medium mb-3">Filter nach Duft:</label>
+<div>
+<label class="custom-checkbox">
+<input type="checkbox">
+<span class="checkmark"></span>
+Virgin Vanilla
+</label>
+<label class="custom-checkbox">
+<input type="checkbox">
+<span class="checkmark"></span>
+Scharfer Zimt­schwung
+</label>
+<label class="custom-checkbox">
+<input type="checkbox">
+<span class="checkmark"></span>
+Frucht-Cocktail 
+</label>
+<label class="custom-checkbox">
+<input type="checkbox">
+<span class="checkmark"></span>
+Holzige Noten
+</label>
+<label class="custom-checkbox">
+<input type="checkbox">
+<span class="checkmark"></span>
+Blumen-Bouquet
+</label>
+</div>
+</div>
+</div>
+
+<div class="col-span-1 md:col-span-2">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Candle 1 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
+<div class="h-48 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-5">
+<h3 class="text-lg font-semibold text-gray-900">Flaming Dick</h3>
+<div class="star-rating mt-1 text-xs">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="far fa-star"></i>
+</div>
+<div class="flex items-center mt-2 text-xs text-gray-500">
+<i class="fas fa-fire-alt mr-1"></i>
+<span>40h Brennzeit</span>
+<span class="mx-2">|</span>
+<i class="fas fa-leaf mr-1"></i>
+<span>Vanille</span>
+</div>
+<div class="flex justify-between items-center mt-3">
+<span class="text-amber-500 font-bold">€19,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+
+<!-- Candle 2 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
+<div class="h-48 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-5">
+<h3 class="text-lg font-semibold text-gray-900">Scented Dick</h3>
+<div class="star-rating mt-1 text-xs">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half"></i>
+<i class="far fa-star"></i>
+</div>
+<div class="flex items-center mt-2 text-xs text-gray-500">
+<i class="fas fa-fire-alt mr-1"></i>
+<span>45h Brennzeit</span>
+<span class="mx-2">|</span>
+<i class="fas fa-leaf mr-1"></i>
+<span>Zimt</span>
+</div>
+<div class="flex justify-between items-center mt-3">
+<span class="text-amber-500 font-bold">€18,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+
+<!-- Candle 3 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
+<div class="product-badge bg-purple-500">Bestseller</div>
+<div class="h-48 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-5">
+<h3 class="text-lg font-semibold text-gray-900">Rainbow Dick</h3>
+<div class="star-rating mt-1 text-xs">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+<div class="flex items-center mt-2 text-xs text-gray-500">
+<i class="fas fa-fire-alt mr-1"></i>
+<span>50h Brennzeit</span>
+<span class="mx-2">|</span>
+<i class="fas fa-leaf mr-1"></i>
+<span>Fruchtmix</span>
+</div>
+<div class="flex justify-between items-center mt-3">
+<span class="text-amber-500 font-bold">€22,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+
+<!-- Candle 4 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
+<div class="h-48 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-5">
+<h3 class="text-lg font-semibold text-gray-900">Glitter Dick</h3>
+<div class="star-rating mt-1 text-xs">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="far fa-star"></i>
+</div>
+<div class="flex items-center mt-2 text-xs text-gray-500">
+<i class="fas fa-fire-alt mr-1"></i>
+<span>35h Brennzeit</span>
+<span class="mx-2">|</span>
+<i class="fas fa-leaf mr-1"></i>
+<span>Waldaroma</span>
+</div>
+<div class="flex justify-between items-center mt-3">
+<span class="text-amber-500 font-bold">€24,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+
+<!-- Candle 5 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card">
+<div class="h-48 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-5">
+<h3 class="text-lg font-semibold text-gray-900">Luxury Dick</h3>
+<div class="star-rating mt-1 text-xs">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half"></i>
+</div>
+<div class="flex items-center mt-2 text-xs text-gray-500">
+<i class="fas fa-fire-alt mr-1"></i>
+<span>60h Brennzeit</span>
+<span class="mx-2">|</span>
+<i class="fas fa-leaf mr-1"></i>
+<span>Sandelholz</span>
+</div>
+<div class="flex justify-between items-center mt-3">
+<span class="text-amber-500 font-bold">€29,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+
+<!-- Candle 6 -->
+<div class="bg-gray-50 rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative">
+<div class="product-badge bg-green-500">Neu</div>
+<div class="h-48 bg-gray-100 flex items-center justify-center">
+<div class="text-5xl text-gray-300"><i class="fas fa-image"></i></div>
+</div>
+<div class="p-5">
+<h3 class="text-lg font-semibold text-gray-900">Mood Dick</h3>
+<div class="star-rating mt-1 text-xs">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+<div class="flex items-center mt-2 text-xs text-gray-500">
+<i class="fas fa-fire-alt mr-1"></i>
+<span>50h Brennzeit</span>
+<span class="mx-2">|</span>
+<i class="fas fa-leaf mr-1"></i>
+<span>Lavendel</span>
+</div>
+<div class="flex justify-between items-center mt-3">
+<span class="text-amber-500 font-bold">€26,99</span>
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs">
+<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="text-center mt-12">
+<a href="#" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-md font-medium inline-flex items-center shadow-md">
+Alle Candicks ansehen
+<i class="fas fa-arrow-right ml-2"></i>
+</a>
+</div>
+</div>
+</section>
+
+<!-- Customer Reviews -->
+<section class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-3xl font-bold text-gray-900 mb-2 text-center">Kundenstimmen</h2>
+<p class="text-lg text-center text-gray-600 mb-12">Was unsere Kunden über unsere Produkte sagen</p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-white p-8 rounded-lg shadow-md">
+<div class="flex justify-between items-start mb-4">
+<div>
+<div class="star-rating mb-2">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">Absolut begeistert!</h3>
+</div>
+<div class="text-amber-500 text-3xl">
+<i class="fas fa-quote-right"></i>
+</div>
+</div>
+<p class="text-gray-600 mb-6">Die Qualität dieser Figuren ist unübertroffen! Die Detailgenauigkeit ist erstaunlich, und sie kommen genau wie abgebildet an. Definitiv ein Hingucker in meiner Sammlung.</p>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-500">
+<i class="fas fa-user"></i>
+</div>
+<div class="ml-3">
+<p class="text-gray-900 font-medium">Max M.</p>
+<p class="text-gray-500 text-sm">Stammkunde seit 2022</p>
+</div>
+</div>
+</div>
+
+<div class="bg-white p-8 rounded-lg shadow-md">
+<div class="flex justify-between items-start mb-4">
+<div>
+<div class="star-rating mb-2">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">Perfekte Geschenkidee</h3>
+</div>
+<div class="text-amber-500 text-3xl">
+<i class="fas fa-quote-right"></i>
+</div>
+</div>
+<p class="text-gray-600 mb-6">Habe einen Superhero Dick für meinen Bruder gekauft und er liebt ihn! Der Versand war schnell und die Verpackung sehr sicher. Werde definitiv wieder bestellen.</p>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-500">
+<i class="fas fa-user"></i>
+</div>
+<div class="ml-3">
+<p class="text-gray-900 font-medium">Sarah K.</p>
+<p class="text-gray-500 text-sm">Bestellt vor 2 Monaten</p>
+</div>
+</div>
+</div>
+
+<div class="bg-white p-8 rounded-lg shadow-md">
+<div class="flex justify-between items-start mb-4">
+<div>
+<div class="star-rating mb-2">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half"></i>
+</div>
+<h3 class="text-lg font-semibold text-gray-900">Tolle Kerzen</h3>
+</div>
+<div class="text-amber-500 text-3xl">
+<i class="fas fa-quote-right"></i>
+</div>
+</div>
+<p class="text-gray-600 mb-6">Die Rainbow Candicks sind nicht nur lustig, sondern duften auch fantastisch. Sie brennen gleichmäßig und lange. Ein echter Hingucker auf meiner Geburtstagsparty!</p>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-500">
+<i class="fas fa-user"></i>
+</div>
+<div class="ml-3">
+<p class="text-gray-900 font-medium">Thomas L.</p>
+<p class="text-gray-500 text-sm">Treuer Kunde</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="text-center mt-10">
+<a href="#" class="text-amber-500 hover:text-amber-600 font-medium inline-flex items-center">
+Alle Bewertungen lesen
+<i class="fas fa-arrow-right ml-2"></i>
+</a>
+</div>
+</div>
+</section>
+
+<!-- Features Section with Artistic Touch -->
+<section class="py-16 bg-white relative">
+<div class="absolute top-0 left-0 w-full h-full bg-pattern opacity-10"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Was uns <span class="text-amber-500 art-font">besonders</span> macht</h2>
+<p class="text-lg text-center text-gray-600 mb-12 max-w-3xl mx-auto">Wir kombinieren Kunsthandwerk mit Humor, um einzigartige Produkte zu schaffen, die sowohl hochwertig als auch ausdrucksstark sind</p>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-white p-8 rounded-lg shadow-md text-center border-t-4 border-amber-500">
+<div class="text-amber-500 text-4xl mb-6">
+<i class="fas fa-print"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Präziser 3D-Druck</h3>
+<p class="text-gray-600">Wir verwenden modernste 3D-Drucker für die präzisesten Details und robuste Konstruktionen</p>
+<div class="mt-6">
+<span class="inline-block artist-signature">Detailgenau</span>
+</div>
+</div>
+
+<div class="bg-white p-8 rounded-lg shadow-md text-center border-t-4 border-amber-500">
+<div class="text-amber-500 text-4xl mb-6">
+<i class="fas fa-paint-brush"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Künstlerische Bemalung</h3>
+<p class="text-gray-600">Jedes Stück wird von unserem Team talentierter Künstler individuell von Hand bemalt</p>
+<div class="mt-6">
+<span class="inline-block artist-signature">Handarbeit</span>
+</div>
+</div>
+
+<div class="bg-white p-8 rounded-lg shadow-md text-center border-t-4 border-amber-500">
+<div class="text-amber-500 text-4xl mb-6">
+<i class="fas fa-laugh-beam"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Humorvolles Design</h3>
+<p class="text-gray-600">Unsere Designs vereinen künstlerischen Wert mit einer Prise Humor für ein Lächeln im Alltag</p>
+<div class="mt-6">
+<span class="inline-block artist-signature">Mit Liebe gemacht</span>
+</div>
+</div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+<div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-amber-500">
+<div class="flex items-start">
+<div class="text-amber-500 text-4xl mr-6">
+<i class="fas fa-leaf"></i>
+</div>
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Umweltbewusstsein</h3>
+<p class="text-gray-600">Wir verwenden biologisch abbaubare Materialien für unseren 3D-Druck und nachhaltige Wachse für unsere Kerzen. Unsere Verpackungen sind recycelbar und wir setzen uns für eine umweltfreundliche Produktion ein.</p>
+<ul class="mt-4 space-y-2 text-gray-600">
+<li class="flex items-center">
+<i class="fas fa-check text-green-500 mr-2"></i>
+PLA-basierte Druckmaterialien
+</li>
+<li class="flex items-center">
+<i class="fas fa-check text-green-500 mr-2"></i>
+Natürliches Soja- und Bienenwachs
+</li>
+<li class="flex items-center">
+<i class="fas fa-check text-green-500 mr-2"></i>
+Recycelbare Verpackung
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-amber-500">
+<div class="flex items-start">
+<div class="text-amber-500 text-4xl mr-6">
+<i class="fas fa-gift"></i>
+</div>
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Personalisierung</h3>
+<p class="text-gray-600">Machen Sie Ihr Geschenk besonders mit unseren Personalisierungsoptionen. Wir können Namen, Daten oder kurze Botschaften auf die Basis der Figuren oder die Verpackung der Kerzen gravieren.</p>
+<div class="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-100">
+<h4 class="font-medium text-amber-700 mb-2">Personalisierungsoptionen:</h4>
+<p class="text-amber-600 text-sm">Fügen Sie bei der Bestellung einfach Ihre Wunschpersonalisierung hinzu (max. 20 Zeichen). Aufpreis: €5,00</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Häufig gestellte <span class="text-amber-500 art-font">Fragen</span></h2>
+<p class="text-lg text-center text-gray-600 mb-12">Antworten auf die wichtigsten Fragen zu unseren Produkten</p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-white p-6 rounded-lg shadow-md">
+<h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
+<i class="fas fa-question-circle text-amber-500 mr-3"></i>
+Wie pflege ich meine Dickheads Figuren?
+</h3>
+<p class="text-gray-600">Unsere Figuren lassen sich leicht mit einem weichen, trockenen Tuch abstauben. Für hartnäckigere Verschmutzungen empfehlen wir ein leicht feuchtes Tuch. Vermeiden Sie aggressive Reinigungsmittel, da diese die Bemalung beschädigen können.</p>
+</div>
+
+<div class="bg-white p-6 rounded-lg shadow-md">
+<h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
+<i class="fas fa-question-circle text-amber-500 mr-3"></i>
+Wie lange brennen die Candicks?
+</h3>
+<p class="text-gray-600">Unsere Kerzen haben je nach Größe unterschiedliche Brennzeiten. Die Standard-Candicks brennen etwa 35-40 Stunden, während unsere Premium-Linie bis zu 60 Stunden Brennzeit bietet. Für optimale Ergebnisse empfehlen wir, die Kerze beim ersten Gebrauch mindestens 2 Stunden brennen zu lassen.</p>
+</div>
+
+<div class="bg-white p-6 rounded-lg shadow-md">
+<h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
+<i class="fas fa-question-circle text-amber-500 mr-3"></i>
+Sind die 3D-Figuren bruchfest?
+</h3>
+<p class="text-gray-600">Unsere Figuren sind aus hochwertigem PLA-Material gefertigt und für den normalen Gebrauch stabil genug. Sie sollten jedoch nicht als Spielzeug verwendet werden und können bei starkem Druck oder Stürzen brechen. Wir empfehlen, sie als Sammlerstücke zu behandeln.</p>
+</div>
+
+<div class="bg-white p-6 rounded-lg shadow-md">
+<h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
+<i class="fas fa-question-circle text-amber-500 mr-3"></i>
+Kann ich eine Figur in einer bestimmten Farbe bestellen?
+</h3>
+<p class="text-gray-600">Ja, viele unserer Figuren können in verschiedenen Farben bestellt werden. Bei den Produkten mit Farboptionen können Sie Ihre Wunschfarbe im Bestellprozess auswählen. Für spezielle Farbwünsche kontaktieren Sie uns bitte direkt über unser Kontaktformular.</p>
+</div>
+
+<div class="bg-white p-6 rounded-lg shadow-md">
+<h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
+<i class="fas fa-question-circle text-amber-500 mr-3"></i>
+Gibt es Rabatte für größere Bestellungen?
+</h3>
+<p class="text-gray-600">Ja, wir bieten Mengenrabatte für Bestellungen ab 5 Artikeln an. Bei größeren Bestellungen für Events oder als Firmengeschenke kontaktieren Sie uns bitte für ein individuelles Angebot.</p>
+</div>
+
+<div class="bg-white p-6 rounded-lg shadow-md">
+<h3 class="text-xl font-semibold text-gray-900 mb-3 flex items-center">
+<i class="fas fa-question-circle text-amber-500 mr-3"></i>
+Wie verpackt ihr die Produkte für den Versand?
+</h3>
+<p class="text-gray-600">Wir verpacken unsere Produkte sorgfältig in umweltfreundlichen Materialien. Die Figuren werden individuell in Seidenpapier gewickelt und in stoßsicheres Material eingebettet. Kerzen werden in hitzebeständigen Behältern verschickt, um ihre Form zu bewahren.</p>
+</div>
+</div>
+
+<div class="text-center mt-10">
+<p class="text-gray-600 mb-4">Weitere Fragen? Kontaktieren Sie uns!</p>
+<a href="#" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-md font-medium inline-flex items-center">
+<i class="fas fa-envelope mr-2"></i> Kontaktformular
+</a>
+</div>
+</div>
+</section>
+
+<!-- About Section Enhanced -->
+<section id="about" class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="lg:flex lg:items-center lg:space-x-12">
+<div class="lg:w-1/2 mb-8 lg:mb-0">
+<div class="relative">
+<div class="bg-gray-200 h-96 rounded-lg flex items-center justify-center">
+<div class="text-5xl text-gray-400"><i class="fas fa-users"></i></div>
+</div>
+<div class="absolute -bottom-4 -right-4 bg-amber-500 text-white p-4 rounded-lg shadow-lg transform rotate-3">
+<span class="art-font text-xl">Kunst mit Persönlichkeit</span>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2">
+<div class="mb-6">
+<span class="inline-block py-1 px-3 rounded-full bg-amber-100 text-amber-600 text-sm font-medium mb-2">Unsere Geschichte</span>
+<h2 class="text-3xl font-bold text-gray-900">Über <span class="text-amber-500 art-font">DickCraft</span></h2>
+</div>
+<p class="text-gray-600 mb-6">
+Wir sind ein kreatives Team von Künstlern und 3D-Druck-Enthusiasten, die 2019 eine einfache Mission hatten: die Welt ein bisschen lustiger zu machen. Was als Hobby in einer kleinen Werkstatt begann, ist heute ein florierendes Kunstunternehmen mit Kunden in ganz Europa.
+</p>
+<p class="text-gray-600 mb-6">
+Jedes unserer Produkte wird mit Liebe zum Detail entworfen, gedruckt und von Hand bemalt. Von unseren berühmten "Dickheads" Figuren bis zu den stilvollen "Candicks" Kerzen - wir bringen Humor und Kunsthandwerk zusammen, um einzigartige Stücke zu schaffen, die zum Lächeln anregen.
+</p>
+
+<div class="mb-6 p-4 bg-amber-50 rounded-lg border border-amber-100">
+<h3 class="font-medium text-gray-900 mb-2">Unser Team</h3>
+<p class="text-gray-600 text-sm">
+Unser Team besteht aus 12 leidenschaftlichen Künstlern, Designern und Handwerkern, die jeden Tag daran arbeiten, neue und aufregende Produkte zu entwickeln. Wir glauben an Kreativität, Qualität und die Kraft des Humors.
+</p>
+</div>
+
+<div class="flex space-x-4">
+<a href="#" class="text-amber-500 hover:text-amber-600 tooltip">
+<i class="fab fa-instagram text-2xl"></i>
+<span class="tooltiptext">Instagram</span>
+</a>
+<a href="#" class="text-amber-500 hover:text-amber-600 tooltip">
+<i class="fab fa-facebook text-2xl"></i>
+<span class="tooltiptext">Facebook</span>
+</a>
+<a href="#" class="text-amber-500 hover:text-amber-600 tooltip">
+<i class="fab fa-twitter text-2xl"></i>
+<span class="tooltiptext">Twitter</span>
+</a>
+<a href="#" class="text-amber-500 hover:text-amber-600 tooltip">
+<i class="fab fa-tiktok text-2xl"></i>
+<span class="tooltiptext">TikTok</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Newsletter Enhanced -->
+<section class="py-16 animated-bg">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl max-w-4xl mx-auto relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-amber-100 rounded-full -mr-16 -mt-16"></div>
+<div class="absolute bottom-0 left-0 w-24 h-24 bg-amber-100 rounded-full -ml-12 -mb-12"></div>
+
+<div class="text-center relative z-10">
+<h2 class="text-3xl font-bold text-gray-900 mb-3">Verpassen Sie keine Neuigkeiten</h2>
+<p class="text-xl text-gray-600 mb-8 max-w-xl mx-auto">Melden Sie sich für unseren Newsletter an und erhalten Sie exklusive Angebote, Neuigkeiten und Inspirationen</p>
+
+<div class="max-w-md mx-auto">
+<form class="flex flex-col sm:flex-row">
+<input type="email" placeholder="Ihre E-Mail-Adresse" class="flex-grow px-4 py-3 mb-2 sm:mb-0 sm:mr-2 rounded-md border border-gray-300 focus:outline-none focus:border-amber-500">
+<button class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-md transform transition hover:scale-105 flex items-center justify-center">
+<i class="fas fa-paper-plane mr-2"></i> Abonnieren
+</button>
+</form>
+<p class="text-gray-500 text-xs mt-3">
+Durch die Anmeldung stimmen Sie unseren Datenschutzrichtlinien zu. Sie können sich jederzeit abmelden.
+</p>
+</div>
+
+<div class="flex justify-center items-center mt-8">
+<div class="flex items-center px-4">
+<i class="fas fa-tag text-amber-500 mr-2"></i>
+<span class="text-gray-700">10% Rabatt</span>
+</div>
+<div class="border-r border-gray-300 h-6 mx-4"></div>
+<div class="flex items-center px-4">
+<i class="fas fa-gift text-amber-500 mr-2"></i>
+<span class="text-gray-700">Exklusive Angebote</span>
+</div>
+<div class="border-r border-gray-300 h-6 mx-4"></div>
+<div class="flex items-center px-4">
+<i class="fas fa-bell text-amber-500 mr-2"></i>
+<span class="text-gray-700">Neuheiten</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Footer Enhanced -->
+<footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<div class="flex items-center mb-4">
+<i class="fas fa-paint-brush text-amber-500 mr-2"></i>
+<h3 class="text-xl font-bold text-white">Dick<span class="art-font">Craft</span></h3>
+</div>
+<p class="mb-4 text-gray-400">Humorvolle 3D-Kunst und Kerzen für alle, die das Besondere lieben. Handgefertigt mit Liebe zum Detail.</p>
+<div class="flex space-x-4 mb-6">
+<a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
+<i class="fab fa-instagram"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
+<i class="fab fa-facebook"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
+<i class="fab fa-twitter"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
+<i class="fab fa-tiktok"></i>
+</a>
+</div>
+<div class="flex items-center">
+<i class="fas fa-map-marker-alt text-amber-500 mr-2"></i>
+<span class="text-gray-400">Berlin, Deutschland</span>
+</div>
+</div>
+
+<div>
+<h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+<i class="fas fa-shopping-basket text-amber-500 mr-2"></i> Shop
+</h3>
+<ul class="space-y-2">
+<li><a href="#dickheads" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Dickheads Figuren</a></li>
+<li><a href="#candicks" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Candicks Kerzen</a></li>
+<li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Neuheiten</a></li>
+<li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Bestseller</a></li>
+<li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Sale</a></li>
+<li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Geschenkideen</a></li>
+</ul>
+</div>
+
+<div>
+<h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+<i class="fas fa-info-circle text-amber-500 mr-2"></i> Service
+</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Kontakt</a></li>
+<li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Versand & Lieferung</a></li>
+<li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Rücksendungen</a></li>
+<li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> FAQ</a></li>
+<li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Größentabelle</a></li>
+<li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2"></i> Pflegehinweise</a></li>
+</ul>
+</div>
+
+<div>
+<h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+<i class="fas fa-credit-card text-amber-500 mr-2"></i> Zahlungsmethoden
+</h3>
+<div class="grid grid-cols-3 gap-3 mb-6">
+<i class="fab fa-stripe text-2xl text-gray-300"></i>
+<i class="fab fa-paypal text-2xl text-gray-300"></i>
+<i class="fab fa-apple-pay text-2xl text-gray-300"></i>
+<i class="fab fa-google-pay text-2xl text-gray-300"></i>
+<i class="fas fa-credit-card text-2xl text-gray-300"></i>
+<i class="fas fa-university text-2xl text-gray-300"></i>
+</div>
+<div class="p-4 bg-gray-800 rounded-lg mt-4">
+<h4 class="font-medium text-white mb-2 flex items-center">
+<i class="fas fa-headset text-amber-500 mr-2"></i> Kundenservice
+</h4>
+<p class="text-gray-400 text-sm mb-2">Mo-Fr 9:00-17:00 Uhr</p>
+<p class="text-amber-500 font-bold">+49 30 1234567</p>
+<a href="/cdn-cgi/l/email-protection#cba2a5ada48bafa2a8a0a8b9aaadbfe5afae" class="text-amber-500 hover:underline"><span class="__cf_email__" data-cfemail="422b2c242d02262b212921302324366c2627">[email&#160;protected]</span></a>
+</div>
+</div>
+</div>
+
+<div class="border-t border-gray-800 mt-12 pt-8">
+<div class="flex flex-col md:flex-row items-center justify-between">
+<p class="text-sm text-gray-500 mb-4 md:mb-0">&copy; 2023 DickCraft. Alle Rechte vorbehalten.</p>
+<div class="flex space-x-4">
+<a href="#" class="text-gray-500 hover:text-amber-500 text-sm">AGB</a>
+<a href="#" class="text-gray-500 hover:text-amber-500 text-sm">Datenschutz</a>
+<a href="#" class="text-gray-500 hover:text-amber-500 text-sm">Impressum</a>
+<a href="#" class="text-gray-500 hover:text-amber-500 text-sm">Cookie-Einstellungen</a>
+</div>
+</div>
+<div class="text-center mt-4">
+<p class="text-xs text-gray-600">Designed with <i class="fas fa-heart text-amber-500"></i> in Berlin</p>
+</div>
+</div>
+</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Simple cart functionality
+const addToCartButtons = document.querySelectorAll('button');
+addToCartButtons.forEach(button => {
+button.addEventListener('click', function() {
+if (this.innerHTML.includes('Ab in die Hose')) {
+alert('Produkt wurde zum Warenkorb hinzugefügt!');
+}
+});
+});
+
+// Category tabs functionality
+const categoryTabs = document.querySelectorAll('.category-tab');
+categoryTabs.forEach(tab => {
+tab.addEventListener('click', function() {
+// Remove active class from all tabs
+categoryTabs.forEach(t => t.classList.remove('active'));
+// Add active class to clicked tab
+this.classList.add('active');
+});
+});
+
+// Gallery thumbnails functionality
+const galleryThumbs = document.querySelectorAll('.gallery-thumb');
+galleryThumbs.forEach(thumb => {
+thumb.addEventListener('click', function() {
+// Remove active class from all thumbs
+galleryThumbs.forEach(t => t.classList.remove('active'));
+// Add active class to clicked thumb
+this.classList.add('active');
+});
+});
+</script>
 </body>
 </html>
-  
-    
+
