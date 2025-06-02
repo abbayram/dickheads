@@ -1,0 +1,53 @@
+<!-- -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{product_name}} - Shop Name</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Shop Name</h1>
+            </div>
+            <div class="nav-links">
+                <a href="/index.html">Startseite</a>
+                <a href="/products.html">Produkte</a>
+                <div class="admin-links" id="admin-links" style="display: none;">
+                    <a href="/admin-dashboard.html">Admin Dashboard</a>
+                    <button id="logout-btn">Abmelden</button>
+                </div>
+                <div class="login-links" id="login-links">
+                    <a href="/admin-login.html">Admin Login</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="product-detail">
+            <div class="product-gallery">
+                {{product_images}}
+            </div>
+            
+            <div class="product-info">
+                <h1>{{product_name}}</h1>
+                <p class="product-price">{{product_price}}</p>
+                <div class="product-description">
+                    {{product_description}}
+                </div>
+                <button class="btn add-to-cart-btn">In den Warenkorb</button>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Shop Name - Alle Rechte vorbehalten</p>
+    </footer>
+    
+    <script src="/main.js"></script>
+</body>
+</html>
