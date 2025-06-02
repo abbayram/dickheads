@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DickCraft - Produktdetailseite</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+.art-font {
+  font-family: 'Caveat', cursive;
+}
+.star-rating {
+  color: #F59E0B;
+}
+.product-tag {
+  display: inline-block;
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #F59E0B;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  margin: 0.25rem;
+}
+.gallery-thumb {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+.gallery-thumb.active {
+  border-color: #F59E0B;
+}
+.product-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #F59E0B;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 10;
+}
+.color-theme {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 5px;
+  cursor: pointer;
+  border: 2px solid white;
+}
+.admin-panel {
+  background-color: #f8fafc;
+  border-left: 4px solid #F59E0B;
+}
+.admin-panel.closed {
+  transform: translateX(100%);
+}
+.hidden-input {
+  display: none;
+}
+.image-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.375rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<!-- Navigation -->
+<nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-bold text-amber-500 flex items-center">
+                    <i class="fas fa-paint-brush mr-2"></i>
+                    <span>Dick<span class="art-font">Craft</span></span>
+                </a>
+                <div class="hidden md:ml-10 md:flex md:space-x-8">
+                    <a href="#" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Home</a>
+                    <a href="#" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Dickheads</a>
+                    <a href="#" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Candicks</a>
+                    <a href="#" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">Über uns</a>
+                    <a href="#" class="text-gray-900 hover:text-amber-500 px-3 py-2 font-medium">FAQ</a>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <button class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
+                    <i class="fas fa-search text-gray-600"></i>
+                </button>
+                <div class="ml-4 relative">
+                    <button class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
+                        <i class="fas fa-shopping-cart text-gray-600"></i>
+                        <span id="cart-count" class="absolute top-0 right-0 bg-amber-500 text-xs text-white rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+                <div class="ml-4">
+                    <button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md">
+                        <i class="fas fa-user mr-1"></i> Login
+                    </button>
+                </div>
+                <button id="admin-toggle" class="ml-4 p-2 rounded-full hover:bg-gray-100 focus:outline-none">
+                    <i class="fas fa-cog text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Admin Panel (Slides in from right) -->
+<div id="admin-panel" class="admin-panel fixed top-16 right-0 w-full md:w-1/3 h-screen bg-white shadow-xl z-40 transform transition-transform duration-300 overflow-auto p-6">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold text-gray-900">Admin-Bereich</h2>
+        <button id="close-admin" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+    </div>
+    
+    <div class="mb-6 border-b pb-4">
+        <h3 class="text-lg font-semibold mb-2">Produktverwaltung</h3>
+        <div class="flex space-x-2">
+            <button id="new-product-btn" class="bg-green-500 text-white px-4 py-2 rounded-md flex items-center">
+                <i class="fas fa-plus mr-2"></i> Neues Produkt
+            </button>
+            <button id="edit-current-btn" class="bg-amber-500 text-white px-4 py-2 rounded-md flex items-center">
+                <i class="fas fa-edit mr-2"></i> Aktuelles Produkt bearbeiten
+            </button>
+        </div>
+    </div>
+    
+    <div id="product-form" class="hidden">
+        <h3 class="text-lg font-semibold mb-4">Produktdetails</h3>
+        <form id="product-editor">
+            <input type="hidden" id="product-id" value="">
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="product-name">
+                    Produktname
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-name" type="text" placeholder="Name des Produkts">
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="product-price">
+                    Preis (€)
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-price" type="number" step="0.01" placeholder="29.99">
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="product-description">
+                    Beschreibung
+                </label>
+                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-description" rows="4" placeholder="Produktbeschreibung..."></textarea>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="product-category">
+                    Kategorie
+                </label>
+                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-category">
+                    <option value="dickheads">Dickheads</option>
+                    <option value="candicks">Candicks</option>
+                </select>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="product-subcategory">
+                    Unterkategorie
+                </label>
+                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-subcategory">
+                    <option value="superhelden">Superhelden</option>
+                    <option value="sport">Sport</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="kuenstler">Künstler-Edition</option>
+                    <option value="duft">Duft-Dicks</option>
+                    <option value="bunt">Bunt-Brummer</option>
+                    <option value="seasonal">Seasonal Dudes</option>
+                    <option value="geschenk">Geschenk-Gockel</option>
+                </select>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    Hauptbild
+                </label>
+                <div class="flex items-center">
+                    <label class="flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide border border-blue cursor-pointer hover:bg-amber-50">
+                        <i class="fas fa-cloud-upload-alt fa-2x text-amber-500"></i>
+                        <span class="mt-2 text-base leading-normal">Hauptbild auswählen</span>
+                        <input type="file" id="main-image-upload" class="hidden-input" accept="image/*">
+                    </label>
+                    <div id="main-image-preview" class="ml-4"></div>
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    Zusätzliche Bilder
+                </label>
+                <div class="flex items-center">
+                    <label class="flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide border border-blue cursor-pointer hover:bg-amber-50">
+                        <i class="fas fa-images fa-2x text-amber-500"></i>
+                        <span class="mt-2 text-base leading-normal">Weitere Bilder auswählen</span>
+                        <input type="file" id="gallery-images-upload" class="hidden-input" accept="image/*" multiple>
+                    </label>
+                </div>
+                <div id="gallery-images-preview" class="flex flex-wrap mt-2"></div>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="product-badge">
+                    Badge (optional)
+                </label>
+                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-badge">
+                    <option value="">Keine</option>
+                    <option value="NEU">NEU</option>
+                    <option value="SALE">SALE</option>
+                    <option value="Bestseller">Bestseller</option>
+                    <option value="Limitiert">Limitiert</option>
+                </select>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="product-rating">
+                    Bewertung (0-5)
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-rating" type="number" step="0.5" min="0" max="5" placeholder="4.5">
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    Verfügbare Farben
+                </label>
+                <div class="flex items-center space-x-2">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox color-checkbox" value="amber" data-color="#F59E0B">
+                        <span class="ml-2">Amber</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox color-checkbox" value="blue" data-color="#3B82F6">
+                        <span class="ml-2">Blau</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox color-checkbox" value="red" data-color="#EF4444">
+                        <span class="ml-2">Rot</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox color-checkbox" value="purple" data-color="#8B5CF6">
+                        <span class="ml-2">Lila</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    Verfügbare Größen
+                </label>
+                <div class="flex items-center space-x-2">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox size-checkbox" value="S">
+                        <span class="ml-2">S</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox size-checkbox" value="M">
+                        <span class="ml-2">M</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox size-checkbox" value="L">
+                        <span class="ml-2">L</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-6">
+                <button class="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Speichern
+                </button>
+                <button id="cancel-edit" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    Abbrechen
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div id="product-list-container">
+        <h3 class="text-lg font-semibold mb-4">Produktliste</h3>
+        <ul id="product-list" class="space-y-2">
+            <!-- Produktliste wird durch JS gefüllt -->
+        </ul>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumbs -->
+        <div class="mb-6 flex text-sm text-gray-600">
+            <a href="#" class="hover:text-amber-500">Home</a>
+            <span class="mx-2">/</span>
+            <a href="#" id="category-breadcrumb" class="hover:text-amber-500">Dickheads</a>
+            <span class="mx-2">/</span>
+            <span id="product-breadcrumb" class="text-amber-500 font-medium">Olympischer Dick-us Maximus</span>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="lg:flex">
+                <!-- Product Images Section -->
+                <div class="lg:w-1/2">
+                    <!-- Main Image -->
+                    <div class="relative h-96">
+                        <div id="product-badge" class="product-badge hidden"></div>
+                        <img id="main-product-image" class="w-full h-full object-contain" src="https://via.placeholder.com/600x400?text=Hauptbild" alt="Produktbild">
+                    </div>
+                    
+                    <!-- Thumbnails -->
+                    <div class="p-4 flex space-x-3 overflow-x-auto">
+                        <div class="min-w-max gallery-thumb active" data-image="https://via.placeholder.com/600x400?text=Hauptbild">
+                            <img class="w-16 h-16 object-cover rounded" src="https://via.placeholder.com/600x400?text=Hauptbild" alt="Thumbnail 1">
+                        </div>
+                        <div class="min-w-max gallery-thumb" data-image="https://via.placeholder.com/600x400?text=Bild+2">
+                            <img class="w-16 h-16 object-cover rounded" src="https://via.placeholder.com/600x400?text=Bild+2" alt="Thumbnail 2">
+                        </div>
+                        <div class="min-w-max gallery-thumb" data-image="https://via.placeholder.com/600x400?text=Bild+3">
+                            <img class="w-16 h-16 object-cover rounded" src="https://via.placeholder.com/600x400?text=Bild+3" alt="Thumbnail 3">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Details Section -->
+                <div class="lg:w-1/2 p-8">
+                    <div id="product-tags" class="mb-2">
+                        <span class="product-tag bg-purple-100 text-purple-500">Premium</span>
+                        <span class="product-tag">Champion</span>
+                    </div>
+                    
+                    <h1 id="product-name" class="text-3xl font-bold text-gray-900">Olympischer Dick-us Maximus</h1>
+                    
+                    <div class="star-rating mt-2 flex items-center">
+                        <div id="stars-container">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half"></i>
+                        </div>
+                        <span id="rating-count" class="text-gray-600 text-sm ml-1">(87 Bewertungen)</span>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <p id="product-description" class="text-gray-700">
+                            Unser Gold-Stück! Muskelhart, schweißglänzend – bereit, den Podest-Pfosten zu erklimmen. Diese handgefertigte Figur ist aus hochwertigem PLA gefertigt und handbemalt für maximalen Detailreichtum.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <p class="font-semibold text-gray-700">Farbe wählen:</p>
+                        <div id="color-options" class="flex mt-2">
+                            <div class="color-theme bg-amber-500 border-amber-600" data-color="amber"></div>
+                            <div class="color-theme bg-blue-500 border-blue-600" data-color="blue"></div>
+                            <div class="color-theme bg-red-500 border-red-600" data-color="red"></div>
+                            <div class="color-theme bg-purple-500 border-purple-600" data-color="purple"></div>
+                        </div>
+                        <input type="hidden" id="selected-color" value="amber">
+                    </div>
+                    
+                    <div class="mt-6">
+                        <p class="font-semibold text-gray-700">Größe:</p>
+                        <div id="size-options" class="flex mt-2 space-x-2">
+                            <button class="px-3 py-1 border-2 border-amber-500 text-amber-500 rounded-md" data-size="S">S</button>
+                            <button class="px-3 py-1 border-2 border-gray-200 text-gray-600 rounded-md" data-size="M">M</button>
+                            <button class="px-3 py-1 border-2 border-gray-200 text-gray-600 rounded-md" data-size="L">L</button>
+                        </div>
+                        <input type="hidden" id="selected-size" value="S">
+                    </div>
+                    
+                    <div class="flex justify-between items-center mt-8">
+                        <span id="product-price" class="text-amber-500 font-bold text-2xl">€28,99</span>
+                        <div class="flex items-center">
+                            <div class="mr-3">
+                                <label class="sr-only">Menge</label>
+                                <input type="number" id="quantity" min="1" value="1" class="w-14 border border-gray-300 rounded px-2 py-1 text-center">
+                            </div>
+                            <button id="add-to-cart" class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md flex items-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Ab in die Hose
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 text-gray-600 text-sm">
+                        <p><i class="fas fa-truck mr-2"></i> Kostenloser Versand ab €50</p>
+                        <p class="mt-1"><i class="fas fa-shield-alt mr-2"></i> 30 Tage Rückgaberecht</p>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <h3 class="font-semibold text-gray-900">Produktdetails</h3>
+                        <div class="grid grid-cols-2 gap-4 mt-3">
+                            <div>
+                                <p class="text-gray-600 text-sm"><span class="font-medium">Material:</span> PLA (Biologisch abbaubar)</p>
+                                <p class="text-gray-600 text-sm mt-1"><span class="font-medium">Höhe:</span> 15cm</p>
+                                <p class="text-gray-600 text-sm mt-1"><span class="font-medium">Gewicht:</span> 180g</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 text-sm"><span class="font-medium">Handgemalt:</span> Ja</p>
+                                <p class="text-gray-600 text-sm mt-1"><span class="font-medium">Verpackung:</span> Recyclebare Box</p>
+                                <p class="text-gray-600 text-sm mt-1"><span class="font-medium">Artikelnummer:</span> DH-OLY-001</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Related Products -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Das könnte dir auch gefallen</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="related-products">
+                <!-- Diese Produkte werden dynamisch aus dem lokalen Speicher geladen -->
+            </div>
+        </div>
+        
+        <!-- Reviews Section -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Kundenbewertungen</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div class="mb-4 md:mb-0">
+                        <div class="flex items-center">
+                            <div class="text-4xl font-bold text-gray-900 mr-4">4.5</div>
+                            <div>
+                                <div class="star-rating text-xl">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half"></i>
+                                </div>
+                                <p class="text-gray-600 mt-1">87 Bewertungen</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-md flex items-center">
+                            <i class="fas fa-pen mr-2"></i> Bewertung schreiben
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mt-8 space-y-6">
+                    <!-- Review 1 -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <div class="flex items-center mb-2">
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">vor 2 Wochen</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Perfektes Geschenk!</h3>
+                        <p class="text-gray-600 mt-2">Habe diese Figur als Scherzgeschenk für einen Freund gekauft, und er war total begeistert. Die Qualität ist erstaunlich, jedes Detail ist perfekt ausgearbeitet.</p>
+                        <div class="mt-3 flex items-center">
+                            <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-gray-500">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span class="ml-2 text-gray-700 font-medium">Max M.</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Review 2 -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <div class="flex items-center mb-2">
+                            <div class="star-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">vor 1 Monat</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900">Tolle Qualität</h3>
+                        <p class="text-gray-600 mt-2">Die Figur ist sehr gut verarbeitet und macht einen wertigen Eindruck. Nur ein Stern Abzug, weil die Bemalung an einer Stelle leicht verwischt war.</p>
+                        <div class="mt-3 flex items-center">
+                            <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-gray-500">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span class="ml-2 text-gray-700 font-medium">Sarah K.</span>
+                        </div>
+                    </div>
+                    
+                    <!-- View More Button -->
+                    <div class="text-center pt-2">
+                        <button class="text-amber-500 hover:text-amber-600 font-medium">
+                            Alle 87 Bewertungen anzeigen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-paint-brush text-amber-500 mr-2"></i>
+                    <h3 class="text-xl font-bold text-white">Dick<span class="art-font">Craft</span></h3>
+                </div>
+                <p class="mb-4 text-gray-400">Humorvolle 3D-Kunst und Kerzen für alle, die das Besondere lieben. Handgefertigt mit Liebe zum Detail.</p>
+                <div class="flex space-x-4 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-map-marker-alt text-amber-500 mr-2"></i>
+                    <span class="text-gray-400">Berlin, Deutschland</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <i class="fas fa-shopping-basket text-amber-500 mr-2"></i> Shop
+                </h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">Dickheads Figuren</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">Candicks Kerzen</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">Neuheiten</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">Bestseller</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">Sale</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">Geschenkideen</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <i class="fas fa-info-circle text-amber-500 mr-2"></i> Service
+                </h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">Kontakt</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">Versand & Lieferung</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">Rücksendungen</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">FAQ</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">Größentabelle</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-amber-500 transition-colors">Pflegehinweise</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <i class="fas fa-credit-card text-amber-500 mr-2"></i> Zahlungsmethoden
+                </h3>
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <i class="fab fa-stripe text-2xl text-gray-300"></i>
+                    <i class="fab fa-paypal text-2xl text-gray-300"></i>
+                    <i class="fab fa-apple-pay text-2xl text-gray-300"></i>
+                    <i class="fab fa-google-pay text-2xl text-gray-300"></i>
+                    <i class="fas fa-credit-card text-2xl text-gray-300"></i>
+                    <i class="fas fa-university text-2xl text-gray-300"></i>
+                </div>
+                <div class="p-4 bg-gray-800 rounded-lg mt-4">
+                    <h4 class="font-medium text-white mb-2 flex items-center">
+                        <i class="fas fa-headset text-amber-500 mr-2"></i> Kundenservice
+                    </h4>
+                    <p class="text-gray-400 text-sm mb-2">Mo-Fr 9:00-17:00 Uhr</p>
+                    <p class="text-amber-500 font-bold">+49 30 1234567</p>
+                    <a href="mailto:info@dickcraft.de" class="text-amber-500 hover:underline">info@dickcraft.de</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800 mt-12 pt-8">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <p class="text-sm text-gray-500 mb-4 md:mb-0">&copy; 2023 DickCraft. Alle Rechte vorbehalten.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-500 hover:text-amber-500 text-sm">AGB</a>
+                    <a href="#" class="text-gray-500 hover:text-amber-500 text-sm">Datenschutz</a>
+                    <a href="#" class="text-gray-500 hover:text-amber-500 text-sm">Impressum</a>
+                    <a href="#" class="text-gray-500 hover:text-amber-500 text-sm">Cookie-Einstellungen</a>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="text-xs text-gray-600">Designed with <i class="fas fa-heart text-amber-500"></i> in Berlin</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// Dummy Produkt für den Start
+const defaultProduct = {
+    id: 'olympischer-dick-us-maximus',
+    name: 'Olympischer Dick-us Maximus',
+    price: 28.99,
+    description: 'Unser Gold-Stück! Muskelhart, schweißglänzend – bereit, den Podest-Pfosten zu erklimmen. Diese handgefertigte Figur ist aus hochwertigem PLA gefertigt und handbemalt für maximalen Detailreichtum.',
+    category: 'dickheads',
+    subcategory: 'sport',
+    mainImage: 'https://via.placeholder.com/600x400?text=Hauptbild',
+    galleryImages: [
+        'https://via.placeholder.com/600x400?text=Hauptbild',
+        'https://via.placeholder.com/600x400?text=Bild+2',
+        'https://via.placeholder.com/600x400?text=Bild+3'
+    ],
+    badge: 'Premium',
+    rating: 4.5,
+    ratingCount: 87,
+    colors: ['amber', 'blue', 'red', 'purple'],
+    sizes: ['S', 'M', 'L'],
+    tags: ['Premium', 'Champion']
+};
+
+// Beispiel-Produkte für "Das könnte dir auch gefallen"
+const sampleProducts = [
+    {
+        id: 'ballerina-dick-tator',
+        name: 'Ballerina Dick-tator',
+        price: 24.99,
+        description: 'Anmutig auf Spitze – aber untenrum bombenfest.',
+        category: 'dickheads',
+        subcategory: 'kuenstler',
+        mainImage: 'https://via.placeholder.com/300x300?text=Ballerina',
+        rating: 4.0,
+        badge: ''
+    },
+    {
+        id: 'sprinter-schwengel',
+        name: 'Sprinter-Schwengel',
+        price: 22.99,
+        description: 'Immer ein Stück voraus – auch ohne Startblock.',
+        category: 'dickheads',
+        subcategory: 'sport',
+        mainImage: 'https://via.placeholder.com/300x300?text=Sprinter',
+        rating: 3.5,
+        badge: ''
+    },
+    {
+        id: 'cape-capone',
+        name: 'Cape-Capone',
+        price: 26.99,
+        description: 'Rettet täglich die Laune – egal, wie steif die Lage ist.',
+        category: 'dickheads',
+        subcategory: 'superhelden',
+        mainImage: 'https://via.placeholder.com/300x300?text=Superheld',
+        rating: 5.0,
+        badge: 'Bestseller'
+    },
+    {
+        id: 'fantasy-dick',
+        name: 'Fantasy Dick',
+        price: 25.99,
+        description: 'Bereit, Drachen zu bezwingen – und Blicke gleich mit.',
+        category: 'dickheads',
+        subcategory: 'fantasy',
+        mainImage: 'https://via.placeholder.com/300x300?text=Fantasy',
+        rating: 4.0,
+        badge: 'NEU'
+    }
+];
+
+// Admin Panel Toggle
+document.getElementById('admin-toggle').addEventListener('click', function() {
+    const adminPanel = document.getElementById('admin-panel');
+    adminPanel.classList.toggle('transform');
+    adminPanel.classList.toggle('translate-x-full');
+});
+
+document.getElementById('close-admin').addEventListener('click', function() {
+    const adminPanel = document.getElementById('admin-panel');
+    adminPanel.classList.add('transform');
+    adminPanel.classList.add('translate-x-full');
+});
+
+// Produkte im localStorage speichern und abrufen
+function initProducts() {
+    // Wenn noch keine Produkte im localStorage, dann Beispielprodukte hinzufügen
+    if (!localStorage.getItem('dickcraft-products')) {
+        const initialProducts = [defaultProduct, ...sampleProducts];
+        localStorage.setItem('dickcraft-products', JSON.stringify(initialProducts));
+    }
+    
+    // Aktuelles Produkt aus der URL oder default
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id') || defaultProduct.id;
+    
+    // Produkt laden und anzeigen
+    const products = JSON.parse(localStorage.getItem('dickcraft-products'));
+    const currentProduct = products.find(p => p.id === productId) || defaultProduct;
+    
+    displayProduct(currentProduct);
+    loadProductList();
+    loadRelatedProducts(currentProduct);
+}
+
+// Produktdetails anzeigen
+function displayProduct(product) {
+    // Grundlegende Produktinformationen
+    document.getElementById('product-name').textContent = product.name;
+    document.getElementById('product-description').textContent = product.description;
+    document.getElementById('product-price').textContent = `€${product.price.toFixed(2)}`;
+    document.getElementById('product-breadcrumb').textContent = product.name;
+    document.getElementById('category-breadcrumb').textContent = product.category === 'dickheads' ? 'Dickheads' : 'Candicks';
+    
+    // Hauptbild setzen
+    const mainImage = document.getElementById('main-product-image');
+    mainImage.src = product.mainImage;
+    mainImage.alt = product.name;
+    
+    // Badge setzen, falls vorhanden
+    const badgeElement = document.getElementById('product-badge');
+    if (product.badge) {
+        badgeElement.textContent = product.badge;
+        badgeElement.classList.remove('hidden');
+    } else {
+        badgeElement.classList.add('hidden');
+    }
+    
+    // Bewertungssterne setzen
+    const starsContainer = document.getElementById('stars-container');
+    starsContainer.innerHTML = '';
+    const fullStars = Math.floor(product.rating);
+    const hasHalfStar = product.rating % 1 >= 0.5;
+    
+    for (let i = 0; i < 5; i++) {
+        let starElement = document.createElement('i');
+        if (i < fullStars) {
+            starElement.className = 'fas fa-star';
+        } else if (i === fullStars && hasHalfStar) {
+            starElement.className = 'fas fa-star-half';
+        } else {
+            starElement.className = 'far fa-star';
+        }
+        starsContainer.appendChild(starElement);
+    }
+    
+    document.getElementById('rating-count').textContent = `(${product.ratingCount} Bewertungen)`;
+    
+    // Tags setzen
+    const tagsContainer = document.getElementById('product-tags');
+    tagsContainer.innerHTML = '';
+    if (product.tags && product.tags.length > 0) {
+        product.tags.forEach(tag => {
+            const tagElement = document.createElement('span');
+            tagElement.className = 'product-tag';
+            if (tag === 'Premium') {
+                tagElement.classList.add('bg-purple-100', 'text-purple-500');
+            }
+            tagElement.textContent = tag;
+            tagsContainer.appendChild(tagElement);
+        });
+    }
+    
+    // Farboptionen setzen
+    const colorOptions = document.getElementById('color-options');
+    colorOptions.innerHTML = '';
+    if (product.colors && product.colors.length > 0) {
+        product.colors.forEach(color => {
+            const colorElement = document.createElement('div');
+            colorElement.className = 'color-theme';
+            
+            // Farben mappen
+            switch(color) {
+                case 'amber':
+                    colorElement.classList.add('bg-amber-500', 'border-amber-600');
+                    break;
+                case 'blue':
+                    colorElement.classList.add('bg-blue-500', 'border-blue-600');
+                    break;
+                case 'red':
+                    colorElement.classList.add('bg-red-500', 'border-red-600');
+                    break;
+                case 'purple':
+                    colorElement.classList.add('bg-purple-500', 'border-purple-600');
+                    break;
+            }
+            
+            colorElement.setAttribute('data-color', color);
+            colorOptions.appendChild(colorElement);
+            
+            // Event Listener für Farbauswahl
+            colorElement.addEventListener('click', function() {
+                document.querySelectorAll('.color-theme').forEach(el => {
+                    el.style.transform = 'scale(1)';
+                    el.style.boxShadow = 'none';
+                });
+                this.style.transform = 'scale(1.2)';
+                this.style.boxShadow = '0 0 0 2px white, 0 0 0 4px #F59E0B';
+                document.getElementById('selected-color').value = this.getAttribute('data-color');
+            });
+        });
+        
+        // Erste Farbe als aktiv markieren
+        if (colorOptions.firstChild) {
+            colorOptions.firstChild.style.transform = 'scale(1.2)';
+            colorOptions.firstChild.style.boxShadow = '0 0 0 2px white, 0 0 0 4px #F59E0B';
+        }
+    }
+    
+    // Größenoptionen setzen
+    const sizeOptions = document.getElementById('size-options');
+    sizeOptions.innerHTML = '';
+    if (product.sizes && product.sizes.length > 0) {
+        product.sizes.forEach(size => {
+            const sizeButton = document.createElement('button');
+            sizeButton.className = 'px-3 py-1 border-2 border-gray-200 text-gray-600 rounded-md';
+            sizeButton.setAttribute('data-size', size);
+            sizeButton.textContent = size;
+            sizeOptions.appendChild(sizeButton);
+            
+            // Event Listener für Größenauswahl
+            sizeButton.addEventListener('click', function() {
+                document.querySelectorAll('[data-size]').forEach(el => {
+                    el.className = 'px-3 py-1 border-2 border-gray-200 text-gray-600 rounded-md';
+                });
+                this.className = 'px-3 py-1 border-2 border-amber-500 text-amber-500 rounded-md';
+                document.getElementById('selected-size').value = this.getAttribute('data-size');
+            });
+        });
+        
+        // Erste Größe als aktiv markieren
+        if (sizeOptions.firstChild) {
+            sizeOptions.firstChild.className = 'px-3 py-1 border-2 border-amber-500 text-amber-500 rounded-md';
+        }
+    }
+    
+    // Galerie-Thumbnails setzen
+    const thumbnailContainer = document.querySelector('.p-4.flex.space-x-3');
+    thumbnailContainer.innerHTML = '';
+    
+    if (product.galleryImages && product.galleryImages.length > 0) {
+        product.galleryImages.forEach((imgSrc, index) => {
+            const thumbDiv = document.createElement('div');
+            thumbDiv.className = `min-w-max gallery-thumb ${index === 0 ? 'active' : ''}`;
+            thumbDiv.setAttribute('data-image', imgSrc);
+            
+            const thumbImg = document.createElement('img');
+            thumbImg.className = 'w-16 h-16 object-cover rounded';
+            thumbImg.src = imgSrc;
+            thumbImg.alt = `Thumbnail ${index + 1}`;
+            
+            thumbDiv.appendChild(thumbImg);
+            thumbnailContainer.appendChild(thumbDiv);
+            
+            // Event Listener für Thumbnail-Klick
+            thumbDiv.addEventListener('click', function() {
+                document.querySelectorAll('.gallery-thumb').forEach(el => {
+                    el.classList.remove('active');
+                });
+                this.classList.add('active');
+                mainImage.src = this.getAttribute('data-image');
+            });
+        });
+    }
+}
+
+// Verwandte Produkte laden
+function loadRelatedProducts(currentProduct) {
+    const relatedContainer = document.getElementById('related-products');
+    relatedContainer.innerHTML = '';
+    
+    const allProducts = JSON.parse(localStorage.getItem('dickcraft-products'));
+    
+    // Produkte mit gleicher Kategorie oder Unterkategorie anzeigen, aber nicht das aktuelle Produkt
+    const related = allProducts.filter(p => 
+        (p.category === currentProduct.category || p.subcategory === currentProduct.subcategory) && 
+        p.id !== currentProduct.id
+    ).slice(0, 4); // Maximal 4 verwandte Produkte
+    
+    related.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 product-card relative';
+        
+        // Product badge hinzufügen, falls vorhanden
+        if (product.badge) {
+            const badge = document.createElement('div');
+            badge.className = 'product-badge';
+            if (product.badge === 'NEU') {
+                badge.classList.add('bg-green-500');
+            } else if (product.badge === 'SALE') {
+                badge.classList.add('bg-red-500');
+            } else if (product.badge === 'Bestseller') {
+                badge.classList.add('bg-purple-500');
+            }
+            badge.textContent = product.badge;
+            productCard.appendChild(badge);
+        }
+        
+        // Produktbild
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'h-48 bg-gray-100 flex items-center justify-center overflow-hidden';
+        const image = document.createElement('img');
+        image.className = 'w-full h-full object-cover';
+        image.src = product.mainImage;
+        image.alt = product.name;
+        imageContainer.appendChild(image);
+        productCard.appendChild(imageContainer);
+        
+        // Produktinfo
+        const infoContainer = document.createElement('div');
+        infoContainer.className = 'p-4';
+        
+        const name = document.createElement('h3');
+        name.className = 'text-lg font-semibold text-gray-900';
+        name.textContent = product.name;
+        infoContainer.appendChild(name);
+        
+        // Rating anzeigen
+        const ratingDiv = document.createElement('div');
+        ratingDiv.className = 'star-rating mt-1 text-sm';
+        
+        const fullStars = Math.floor(product.rating);
+        const hasHalfStar = product.rating % 1 >= 0.5;
+        
+        for (let i = 0; i < 5; i++) {
+            const star = document.createElement('i');
+            if (i < fullStars) {
+                star.className = 'fas fa-star';
+            } else if (i === fullStars && hasHalfStar) {
+                star.className = 'fas fa-star-half';
+            } else {
+                star.className = 'far fa-star';
+            }
+            ratingDiv.appendChild(star);
+        }
+        infoContainer.appendChild(ratingDiv);
+        
+        // Kurzbeschreibung
+        const description = document.createElement('p');
+        description.className = 'text-gray-600 mt-2 text-sm';
+        description.textContent = product.description;
+        infoContainer.appendChild(description);
+        
+        // Preis und Button
+        const priceRow = document.createElement('div');
+        priceRow.className = 'flex justify-between items-center mt-4';
+        
+        const price = document.createElement('span');
+        price.className = 'text-amber-500 font-bold';
+        price.textContent = `€${product.price.toFixed(2)}`;
+        priceRow.appendChild(price);
+        
+        const buyButton = document.createElement('button');
+        buyButton.className = 'bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-md text-xs';
+        buyButton.innerHTML = '<i class="fas fa-cart-plus mr-1"></i> Ab in die Hose';
+        buyButton.onclick = function() {
+            // Hier könnte Warenkorb-Funktionalität implementiert werden
+            alert('Produkt wurde zum Warenkorb hinzugefügt!');
+        };
+        priceRow.appendChild(buyButton);
+        
+        infoContainer.appendChild(priceRow);
+        productCard.appendChild(infoContainer);
+        
+        // Link um das Produkt zu öffnen
+        const productLink = document.createElement('a');
+        productLink.href = `?id=${product.id}`;
+        productLink.appendChild(productCard);
+        
+        relatedContainer.appendChild(productLink);
+    });
+}
+
+// Produkte im Admin-Panel anzeigen
+function loadProductList() {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = '';
+    
+    const products = JSON.parse(localStorage.getItem('dickcraft-products'));
+    
+    products.forEach(product => {
+        const item = document.createElement('li');
+        item.className = 'bg-white p-3 rounded shadow-sm flex justify-between items-center';
+        
+        const productInfo = document.createElement('div');
+        productInfo.className = 'flex items-center';
+        
+        // Thumbnail
+        const thumbContainer = document.createElement('div');
+        thumbContainer.className = 'w-12 h-12 bg-gray-100 rounded flex-shrink-0 mr-3 overflow-hidden';
+        const thumbnail = document.createElement('img');
+        thumbnail.className = 'w-full h-full object-cover';
+        thumbnail.src = product.mainImage;
+        thumbnail.alt = product.name;
+        thumbContainer.appendChild(thumbnail);
+        productInfo.appendChild(thumbContainer);
+        
+        // Name und Kategorie
+        const nameContainer = document.createElement('div');
+        const nameEl = document.createElement('p');
+        nameEl.className = 'font-medium text-gray-900';
+        nameEl.textContent = product.name;
+        nameContainer.appendChild(nameEl);
+        
+        const categoryEl = document.createElement('p');
+        categoryEl.className = 'text-xs text-gray-500';
+        categoryEl.textContent = `${product.category} / ${product.subcategory}`;
+        nameContainer.appendChild(categoryEl);
+        productInfo.appendChild(nameContainer);
+        
+        item.appendChild(productInfo);
+        
+        // Aktionen
+        const actions = document.createElement('div');
+        actions.className = 'flex space-x-2';
+        
+        const editButton = document.createElement('button');
+        editButton.className = 'text-amber-500 hover:text-amber-700';
+        editButton.innerHTML = '<i class="fas fa-edit"></i>';
+        editButton.onclick = function() {
+            editProduct(product.id);
+        };
+        actions.appendChild(editButton);
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'text-red-500 hover:text-red-700';
+        deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+        deleteButton.onclick = function() {
+            if (confirm(`Möchten Sie das Produkt "${product.name}" wirklich löschen?`)) {
+                deleteProduct(product.id);
+            }
+        };
+        actions.appendChild(deleteButton);
+        
+        const viewButton = document.createElement('button');
+        viewButton.className = 'text-blue-500 hover:text-blue-700';
+        viewButton.innerHTML = '<i class="fas fa-eye"></i>';
+        viewButton.onclick = function() {
+            window.location.href = `?id=${product.id}`;
+        };
+        actions.appendChild(viewButton);
+        
+        item.appendChild(actions);
+        productList.appendChild(item);
+    });
+}
+
+// Neues Produkt erstellen
+document.getElementById('new-product-btn').addEventListener('click', function() {
+    clearProductForm();
+    document.getElementById('product-form').classList.remove('hidden');
+    document.getElementById('product-list-container').classList.add('hidden');
+});
+
+// Aktuelles Produkt bearbeiten
+document.getElementById('edit-current-btn').addEventListener('click', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id') || defaultProduct.id;
+    editProduct(productId);
+});
+
+// Produktbearbeitung abbrechen
+document.getElementById('cancel-edit').addEventListener('click', function() {
+    document.getElementById('product-form').classList.add('hidden');
+    document.getElementById('product-list-container').classList.remove('hidden');
+});
+
+// Formular für Produktbearbeitung leeren
+function clearProductForm() {
+    document.getElementById('product-id').value = '';
+    document.getElementById('product-name').value = '';
+    document.getElementById('product-price').value = '';
+    document.getElementById('product-description').value = '';
+    document.getElementById('product-category').value = 'dickheads';
+    document.getElementById('product-subcategory').value = 'superhelden';
+    document.getElementById('product-badge').value = '';
+    document.getElementById('product-rating').value = '4.0';
+    document.getElementById('main-image-preview').innerHTML = '';
+    document.getElementById('gallery-images-preview').innerHTML = '';
+    document.querySelectorAll('.color-checkbox').forEach(checkbox => checkbox.checked = false);
+    document.querySelectorAll('.size-checkbox').forEach(checkbox => checkbox.checked = false);
+}
+
+// Produkt zum Bearbeiten laden
+function editProduct(productId) {
+    const products = JSON.parse(localStorage.getItem('dickcraft-products'));
+    const product = products.find(p => p.id === productId);
+    
+    if (product) {
+        document.getElementById('product-id').value = product.id;
+        document.getElementById('product-name').value = product.name;
+        document.getElementById('product-price').value = product.price;
+        document.getElementById('product-description').value = product.description;
+        document.getElementById('product-category').value = product.category;
+        document.getElementById('product-subcategory').value = product.subcategory;
+        document.getElementById('product-badge').value = product.badge || '';
+        document.getElementById('product-rating').value = product.rating;
+        
+        // Hauptbild vorschau
+        const mainPreview = document.getElementById('main-image-preview');
+        mainPreview.innerHTML = '';
+        const mainImg = document.createElement('img');
+        mainImg.className = 'image-preview';
+        mainImg.src = product.mainImage;
+        mainImg.alt = 'Hauptbild Vorschau';
+        mainPreview.appendChild(mainImg);
+        
+        // Galerie-Bilder Vorschau
+        const galleryPreview = document.getElementById('gallery-images-preview');
+        galleryPreview.innerHTML = '';
+        if (product.galleryImages && product.galleryImages.length > 0) {
+            product.galleryImages.forEach((imgSrc, index) => {
+                const imgPreview = document.createElement('img');
+                imgPreview.className = 'image-preview';
+                imgPreview.src = imgSrc;
+                imgPreview.alt = `Galeriebild ${index + 1}`;
+                galleryPreview.appendChild(imgPreview);
+            });
+        }
+        
+        // Farben und Größen setzen
+        document.querySelectorAll('.color-checkbox').forEach(checkbox => {
+            checkbox.checked = product.colors && product.colors.includes(checkbox.value);
+        });
+        document.querySelectorAll('.size-checkbox').forEach(checkbox => {
+            checkbox.checked = product.sizes && product.sizes.includes(checkbox.value);
+        });
+        
+        document.getElementById('product-form').classList.remove('hidden');
+        document.getElementById('product-list-container').classList.add('hidden');
+    }
+}
+
+// Produkt löschen
+function deleteProduct(productId) {
+    let products = JSON.parse(localStorage.getItem('dickcraft-products'));
+    products = products.filter(p => p.id !== productId);
+    localStorage.setItem('dickcraft-products', JSON.stringify(products));
+    loadProductList();
+    
+    // Wenn das gelöschte Produkt gerade angezeigt wird, zur ersten Produktseite wechseln
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentProductId = urlParams.get('id');
+    if (currentProductId === productId) {
+        if (products.length > 0) {
+            window.location.href = `?id=${products[0].id}`;
+        } else {
+            window.location.href = `?`;
+        }
+    }
+}
+
+// Produkt speichern
+document.getElementById('product-editor').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Formularwerte auslesen
+    const productId = document.getElementById('product-id').value || (
+        document.getElementById('product-name').value
+            .toLowerCase()
+            .replace(/[^\w\s]/gi, '')
+            .replace(/\s+/g, '-')
+    );
+    
+    const productName = document.getElementById('product-name').value;
+    const productPrice = parseFloat(document.getElementById('product-price').value);
+    const productDescription = document.getElementById('product-description').value;
+    const productCategory = document.getElementById('product-category').value;
+    const productSubcategory = document.getElementById('product-subcategory').value;
+    const productBadge = document.getElementById('product-badge').value;
+    const productRating = parseFloat(document.getElementById('product-rating').value);
+    
+    // Farbwerte sammeln
+    const selectedColors = [];
+    document.querySelectorAll('.color-checkbox:checked').forEach(checkbox => {
+        selectedColors.push(checkbox.value);
+    });
+    
+    // Größen sammeln
+    const selectedSizes = [];
+    document.querySelectorAll('.size-checkbox:checked').forEach(checkbox => {
+        selectedSizes.push(checkbox.value);
+    });
+    
+    // Bilder aus Vorschau sammeln
+    const mainImagePreview = document.querySelector('#main-image-preview img');
+    const mainImage = mainImagePreview ? mainImagePreview.src : 'https://via.placeholder.com/600x400?text=Hauptbild';
+    
+    const galleryImages = [];
+    document.querySelectorAll('#gallery-images-preview img').forEach(img => {
+        galleryImages.push(img.src);
+    });
+    
+    if (galleryImages.length === 0 && mainImage) {
+        galleryImages.push(mainImage);
+    }
+    
+    // Produkt erstellen oder aktualisieren
+    const product = {
+        id: productId,
+        name: productName,
+        price: productPrice,
+        description: productDescription,
+        category: productCategory,
+        subcategory: productSubcategory,
+        mainImage: mainImage,
+        galleryImages: galleryImages,
+        badge: productBadge,
+        rating: productRating,
+        ratingCount: 0, // Bei neuen Produkten auf 0 setzen
+        colors: selectedColors,
+        sizes: selectedSizes,
+        tags: productBadge ? [productBadge] : []
+    };
+    
+    // Produkt speichern oder aktualisieren
+    let products = JSON.parse(localStorage.getItem('dickcraft-products'));
+    const existingIndex = products.findIndex(p => p.id === productId);
+    
+    if (existingIndex !== -1) {
+        // Bestehende Bewertungen behalten
+        product.ratingCount = products[existingIndex].ratingCount || 0;
+        products[existingIndex] = product;
+    } else {
+        products.push(product);
+    }
+    
+    localStorage.setItem('dickcraft-products', JSON.stringify(products));
+    
+    // UI aktualisieren
+    document.getElementById('product-form').classList.add('hidden');
+    document.getElementById('product-list-container').classList.remove('hidden');
+    loadProductList();
+    
+    // Wenn das aktuell angezeigte Produkt bearbeitet wurde, Anzeige aktualisieren
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentProductId = urlParams.get('id');
+    if (currentProductId === productId) {
+        displayProduct(product);
+        loadRelatedProducts(product);
+    }
+    
+    alert('Produkt wurde erfolgreich gespeichert!');
+});
+
+// Bild-Upload-Funktionalität für Hauptbild
+document.getElementById('main-image-upload').addEventListener('change', function(event) {
+    handleImageUpload(event, document.getElementById('main-image-preview'), false);
+});
+
+// Bild-Upload-Funktionalität für Galerie-Bilder
+document.getElementById('gallery-images-upload').addEventListener('change', function(event) {
+    handleImageUpload(event, document.getElementById('gallery-images-preview'), true);
+});
+
+// Funktion zum Bild-Upload
+function handleImageUpload(event, previewContainer, multiple) {
+    const files = event.target.files;
+    
+    if (!files || files.length === 0) return;
+    
+    if (!multiple) {
+        // Für Hauptbild immer nur ein Bild
+        previewContainer.innerHTML = '';
+    }
+    
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        
+        // Nur Bildtypen erlauben
+        if (!file.type.match('image.*')) continue;
+        
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            const imgPreview = document.createElement('img');
+            imgPreview.className = 'image-preview';
+            imgPreview.src = e.target.result;
+            imgPreview.alt = 'Bildvorschau';
+            previewContainer.appendChild(imgPreview);
+        };
+        
+        reader.readAsDataURL(file);
+    }
+}
+
+// "Ab in die Hose" Button Funktionalität
+document.getElementById('add-to-cart').addEventListener('click', function() {
+    const quantity = document.getElementById('quantity').value;
+    const selectedColor = document.getElementById('selected-color').value;
+    const selectedSize = document.getElementById('selected-size').value;
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id') || defaultProduct.id;
+    
+    const products = JSON.parse(localStorage.getItem('dickcraft-products'));
+    const product = products.find(p => p.id === productId) || defaultProduct;
+    
+    // Hier könnte später eine richtige Warenkorb-Funktionalität implementiert werden
+    alert(`${quantity}x ${product.name} (Farbe: ${selectedColor}, Größe: ${selectedSize}) wurde zum Warenkorb hinzugefügt!`);
+    
+    // Warenkorb-Zähler aktualisieren
+    const cartCount = document.getElementById('cart-count');
+    cartCount.textContent = parseInt(cartCount.textContent) + parseInt(quantity);
+});
+
+// Galerie-Thumbnails Funktionalität
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.gallery-thumb')) {
+        const thumb = e.target.closest('.gallery-thumb');
+        const thumbs = document.querySelectorAll('.gallery-thumb');
+        thumbs.forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+        
+        document.getElementById('main-product-image').src = thumb.getAttribute('data-image');
+    }
+});
+
+// Seite initialisieren
+document.addEventListener('DOMContentLoaded', function() {
+    initProducts();
+    
+    // Admin Panel beim Laden verstecken
+    const adminPanel = document.getElementById('admin-panel');
+    adminPanel.classList.add('transform', 'translate-x-full');
+});
+</script>
+</body>
+</html>
