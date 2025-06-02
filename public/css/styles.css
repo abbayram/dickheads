@@ -235,3 +235,4 @@ input:focus, textarea:focus, select:focus {
 .product-gallery {
     display: grid;
     grid-template-columns: repeat
+}

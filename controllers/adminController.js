@@ -1,133 +1,75 @@
-const Admin = require('../models/Admin');
-const jwt = require('jsonwebtoken');
+// controllers/adminController.js
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import Admin from '../models/Admin.js';
 
-// @desc    Registrieren eines neuen Admins
+// @desc    Admin registrieren
 // @route   POST /api/admin/register
 // @access  Public
-exports.registerAdmin = async (req, res) => {
+export const registerAdmin = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // Überprüfen, ob Admin bereits existiert
-    let admin = await Admin.findOne({ $or: [{ email }, { username }] });
-    
-    if (admin) {
-      return res.status(400).json({
-        success: false,
-        message: 'Admin mit dieser E-Mail oder diesem Benutzernamen existiert bereits'
-      });
+    // Prüfen, ob Admin existiert
+    const existingAdmin = await Admin.findOne({ $or: [{ email }, { username }] });
+    if (existingAdmin) {
+      return res.status(400).json({ message: 'Benutzer oder E-Mail bereits vergeben' });
     }
 
-    // Neuen Admin erstellen
-    admin = new Admin({
+    // Passwort hashen
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newAdmin = new Admin({
       username,
       email,
-      password
+      password: hashedPassword
     });
 
-    // Admin speichern (Passwort wird in der pre-save Middleware gehasht)
-    await admin.save();
-
-    // JWT Token generieren
-    const token = jwt.sign(
-      { id: admin._id },
-      process.env.JWT_SECRET,
-      { expiresIn: '30d' }
-    );
-
-    res.status(201).json({
-      success: true,
-      data: {
-        id: admin._id,
-        username: admin.username,
-        email: admin.email,
-        token
-      }
-    });
+    await newAdmin.save();
+    res.status(201).json({ message: 'Admin erfolgreich registriert' });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: 'Server Error'
-    });
+    res.status(500).json({ message: 'Serverfehler', error: error.message });
   }
 };
 
-// @desc    Admin Login
+// @desc    Admin einloggen
 // @route   POST /api/admin/login
 // @access  Public
-exports.loginAdmin = async (req, res) => {
+export const loginAdmin = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    // Admin in der Datenbank finden
-    const admin = await Admin.findOne({ email });
-    
+    // Admin per Username oder E-Mail suchen
+    const admin = await Admin.findOne({
+      $or: [{ email: username }, { username }]
+    });
     if (!admin) {
-      return res.status(401).json({
-        success: false,
-        message: 'Ungültige Anmeldeinformationen'
-      });
+      return res.status(401).json({ message: 'Ungültige Anmeldedaten' });
     }
 
-    // Passwort überprüfen
-    const isPasswordMatch = await admin.comparePassword(password);
-    
-    if (!isPasswordMatch) {
-      return res.status(401).json({
-        success: false,
-        message: 'Ungültige Anmeldeinformationen'
-      });
+    // Passwort prüfen
+    const isPasswordValid = await bcrypt.compare(password, admin.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Ungültige Anmeldedaten' });
     }
 
-    // JWT Token generieren
+    // Token generieren
     const token = jwt.sign(
-      { id: admin._id },
+      { id: admin._id, username: admin.username },
       process.env.JWT_SECRET,
-      { expiresIn: '30d' }
+      { expiresIn: '1h' }
     );
 
     res.status(200).json({
-      success: true,
-      data: {
+      message: 'Login erfolgreich',
+      token,
+      admin: {
         id: admin._id,
         username: admin.username,
-        email: admin.email,
-        token
+        email: admin.email
       }
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: 'Server Error'
-    });
-  }
-};
-
-// @desc    Admin Profil abrufen
-// @route   GET /api/admin/profile
-// @access  Private
-exports.getAdminProfile = async (req, res) => {
-  try {
-    const admin = await Admin.findById(req.admin.id).select('-password');
-    
-    if (!admin) {
-      return res.status(404).json({
-        success: false,
-        message: 'Admin nicht gefunden'
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      data: admin
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: 'Server Error'
-    });
+    res.status(500).json({ message: 'Serverfehler', error: error.message });
   }
 };

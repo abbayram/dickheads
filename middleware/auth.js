@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
-const Admin = require('../models/Admin');
+import jwt from 'jsonwebtoken';
+import Admin from '../models/Admin.js';
 
-exports.protect = async (req, res, next) => {
+export const protect = async (req, res, next) => {
   let token;
 
   // Token aus dem Authorization-Header lesen

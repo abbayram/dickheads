@@ -1,151 +1,153 @@
-const Product = require('../models/Product');
+import Product from '../models/Product.js';
+import slugify from 'slugify';
+import { createProductPage } from '../utils/productPageGenerator.js';
 
-// @desc    Alle Produkte abrufen
-// @route   GET /api/products
-// @access  Public
-exports.getProducts = async (req, res) => {
+/**
+ * @desc Alle Produkte abrufen
+ * @route GET /api/products
+ * @access Public
+ */
+export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
-    
-    res.status(200).json({
-      success: true,
-      count: products.length,
-      data: products
-    });
+    const products = await Product.find().sort({ createdAt: -1 });
+    return res.status(200).json({ products });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      success: false,
-      message: 'Server Error'
-    });
+    return res.status(500).json({ message: 'Serverfehler', error: error.message });
   }
 };
 
-// @desc    Einzelnes Produkt abrufen
-// @route   GET /api/products/:slug
-// @access  Public
-exports.getProductBySlug = async (req, res) => {
+/**
+ * @desc Einzelnes Produkt per Slug abrufen
+ * @route GET /api/products/:slug
+ * @access Public
+ */
+export const getProductBySlug = async (req, res) => {
   try {
     const product = await Product.findOne({ slug: req.params.slug });
     
     if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: 'Produkt nicht gefunden'
-      });
+      return res.status(404).json({ message: 'Produkt nicht gefunden' });
     }
-
-    res.status(200).json({
-      success: true,
-      data: product
-    });
+    
+    return res.status(200).json({ product });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      success: false,
-      message: 'Server Error'
-    });
+    return res.status(500).json({ message: 'Serverfehler', error: error.message });
   }
 };
 
-// @desc    Neues Produkt erstellen
-// @route   POST /api/products
-// @access  Private (nur Admins)
-exports.createProduct = async (req, res) => {
+/**
+ * @desc Neues Produkt erstellen
+ * @route POST /api/products
+ * @access Private (Admin)
+ */
+export const createProduct = async (req, res) => {
   try {
-    const { name, description, price, images, slug } = req.body;
+    const { name, description, price } = req.body;
+    const slug = slugify(name, { lower: true });
 
-    // Überprüfen, ob Slug bereits existiert
+    // Prüfen, ob der Slug schon existiert
     const existingProduct = await Product.findOne({ slug });
-    
     if (existingProduct) {
-      return res.status(400).json({
-        success: false,
-        message: 'Ein Produkt mit diesem Slug existiert bereits'
-      });
+      return res.status(400).json({ message: 'Ein Produkt mit diesem Namen existiert bereits' });
     }
 
-    // Neues Produkt erstellen
-    const product = await Product.create({
+    // Bilder-Pfade aus Multer (upload.array('images')) aus req.files ziehen
+    const imageUrls = req.files ? req.files.map((file) => `/uploads/${file.filename}`) : [];
+
+    // Neues Produkt anlegen
+    const newProduct = new Product({
       name,
       description,
       price,
-      images: images || [],
+      images: imageUrls,
       slug,
-      createdBy: req.admin.id
+      createdBy: req.adminData ? req.adminData.id : null // Vorausgesetzt, Auth-Middleware hat req.adminData gesetzt
     });
 
-    res.status(201).json({
-      success: true,
-      data: product
+    await newProduct.save();
+
+    // Generiere statische Produktseite (optional)
+    try {
+      await createProductPage(newProduct);
+    } catch (pageError) {
+      console.error('Fehler beim Erstellen der Produktseite:', pageError);
+      // Produkt wurde gespeichert, daher kein return
+    }
+
+    return res.status(201).json({ 
+      message: 'Produkt erfolgreich erstellt', 
+      product: newProduct 
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      success: false,
-      message: 'Server Error'
-    });
+    return res.status(500).json({ message: 'Serverfehler', error: error.message });
   }
 };
 
-// @desc    Produkt aktualisieren
-// @route   PUT /api/products/:id
-// @access  Private (nur Admins)
-exports.updateProduct = async (req, res) => {
+/**
+ * @desc Produkt aktualisieren
+ * @route PUT /api/products/:id
+ * @access Private (Admin)
+ */
+export const updateProduct = async (req, res) => {
   try {
-    let product = await Product.findById(req.params.id);
-    
+    const { id } = req.params;
+    const updates = req.body; // z. B. { name, description, price, images }
+
+    const product = await Product.findById(id);
     if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: 'Produkt nicht gefunden'
-      });
+      return res.status(404).json({ message: 'Produkt nicht gefunden' });
     }
 
-    product = await Product.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
+    // Beispiel: Wenn der Name geändert wird, aktualisiere den Slug
+    if (updates.name && updates.name !== product.name) {
+      updates.slug = slugify(updates.name, { lower: true });
+    }
+
+    // Bilder-Pfade ergänzen, falls neue Uploads im Frontend waren
+    if (req.files?.length) {
+      const newImages = req.files.map((file) => `/uploads/${file.filename}`);
+      updates.images = [...(product.images || []), ...newImages];
+    }
+
+    const updated = await Product.findByIdAndUpdate(
+      id, 
+      updates,
+      { new: true }
     );
 
-    res.status(200).json({
-      success: true,
-      data: product
+    return res.status(200).json({ 
+      message: 'Produkt erfolgreich aktualisiert',
+      product: updated 
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      success: false,
-      message: 'Server Error'
-    });
+    return res.status(500).json({ message: 'Serverfehler', error: error.message });
   }
 };
 
-// @desc    Produkt löschen
-// @route   DELETE /api/products/:id
-// @access  Private (nur Admins)
-exports.deleteProduct = async (req, res) => {
+/**
+ * @desc Produkt löschen
+ * @route DELETE /api/products/:id
+ * @access Private (Admin)
+ */
+export const deleteProduct = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
-    
+    const { id } = req.params;
+
+    const product = await Product.findById(id);
     if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: 'Produkt nicht gefunden'
-      });
+      return res.status(404).json({ message: 'Produkt nicht gefunden' });
     }
 
-    await product.remove();
-
-    res.status(200).json({
-      success: true,
-      data: {}
-    });
+    // Mongoose .remove() ist veraltet, verwenden Sie .deleteOne()
+    await Product.deleteOne({ _id: id });
+    
+    return res.status(200).json({ message: 'Produkt erfolgreich gelöscht' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      success: false,
-      message: 'Server Error'
-    });
+    return res.status(500).json({ message: 'Serverfehler', error: error.message });
   }
 };
