@@ -44,8 +44,18 @@ export const getProductBySlug = async (req, res) => {
  */
 export const createProduct = async (req, res) => {
   try {
-    const { name, description, price } = req.body;
-    const slug = slugify(name, { lower: true });
+    console.log("Eingegangene Daten:", req.body);
+    console.log("Datei-Uploads:", req.files);
+    // Name-Validierung und Daten aus req.body holen
+    const { name, description, price, slug: rawSlug } = req.body;
+    if (!name || typeof name !== 'string' || name.trim() === '') {
+      return res.status(400).json({ message: 'Name ist erforderlich' });
+    }
+
+    // Slug entweder aus rawSlug verwenden oder per slugify aus name generieren
+    const slug = (typeof rawSlug === 'string' && rawSlug.trim() !== '')
+      ? rawSlug.trim()
+      : slugify(name, { lower: true });
 
     // Prüfen, ob der Slug schon existiert
     const existingProduct = await Product.findOne({ slug });
@@ -102,8 +112,12 @@ export const updateProduct = async (req, res) => {
     }
 
     // Beispiel: Wenn der Name geändert wird, aktualisiere den Slug
-    if (updates.name && updates.name !== product.name) {
-      updates.slug = slugify(updates.name, { lower: true });
+    if (typeof updates.name === 'string' && updates.name.trim() !== '' && updates.name !== product.name) {
+      // Slug neu setzen, entweder aus updates.slug oder per slugify aus updates.name
+      const rawSlugUpdate = updates.slug;
+      updates.slug = (typeof rawSlugUpdate === 'string' && rawSlugUpdate.trim() !== '')
+        ? rawSlugUpdate.trim()
+        : slugify(updates.name, { lower: true });
     }
 
     // Bilder-Pfade ergänzen, falls neue Uploads im Frontend waren

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <div class="text-2xl font-bold text-indigo-600 flex items-center">
+            <i class="fas fa-tools mr-2"></i>
+            <span>Admin Dashboard</span>
+          </div>
+        </div>
+        <div class="flex items-center">
+          <button
+            id="logoutBtn"
+            class="text-red-600 hover:text-red-800 focus:outline-none"
+          >
+            <i class="fas fa-sign-out-alt mr-1"></i> Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto mt-6 px-4">
+    <!-- Erfolg & Fehlernachrichten -->
+    <div
+      id="successMessage"
+      class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4"
+    ></div>
+    <div
+      id="errorMessage"
+      class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4"
+    ></div>
+
+    <!-- Produktliste & Button -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold text-gray-800">Produkte verwalten</h2>
+      <button
+        id="addProductTab"
+        class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none"
+      >
+        Neues Produkt
+      </button>
+    </div>
+
+    <!-- Produktliste -->
+    <div id="productListView">
+      <table class="min-w-full divide-y divide-gray-200 bg-white shadow rounded">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Bild
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Name
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Preis
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Aktionen
+            </th>
+          </tr>
+        </thead>
+        <tbody id="productTableBody" class="divide-y divide-gray-200">
+          <!-- Dynamische Einträge werden hier per JS hinzugefügt -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Produktformular (initial versteckt) -->
+    <div id="addProductView" class="hidden bg-white p-6 rounded shadow">
+      <h2 id="formTitle" class="text-xl font-semibold text-gray-800 mb-4">
+        Neues Produkt hinzufügen
+      </h2>
+      <form id="productForm" class="space-y-4">
+        <!-- unsichtbares Feld für Bearbeiten (enthält Produkt-ID) -->
+        <input type="hidden" id="productId" />
+
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700"
+            >Name</label
+          >
+          <input
+            type="text"
+            id="name"
+            required
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label for="price" class="block text-sm font-medium text-gray-700"
+            >Preis (€)</label
+          >
+          <input
+            type="number"
+            id="price"
+            step="0.01"
+            min="0"
+            required
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label for="description" class="block text-sm font-medium text-gray-700"
+            >Beschreibung</label
+          >
+          <textarea
+            id="description"
+            rows="3"
+            required
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="slug" class="block text-sm font-medium text-gray-700"
+            >Slug (URL-Teil)</label
+          >
+          <input
+            type="text"
+            id="slug"
+            required
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label for="images" class="block text-sm font-medium text-gray-700"
+            >Bilder</label
+          >
+          <input
+            type="file"
+            id="images"
+            multiple
+            accept="image/*"
+            class="mt-1 block w-full focus:outline-none"
+          />
+          <div
+            id="imagePreviewContainer"
+            class="mt-2 grid grid-cols-3 gap-2 hidden"
+          ></div>
+        </div>
+
+        <div class="flex space-x-2">
+          <button
+            id="submitBtn"
+            type="submit"
+            class="flex items-center bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none"
+          >
+            <span id="submitBtnText">Produkt speichern</span>
+            <span id="submitSpinner" class="hidden ml-2">
+              <i class="fas fa-circle-notch fa-spin"></i>
+            </span>
+          </button>
+          <button
+            type="button"
+            id="cancelFormBtn"
+            class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none"
+          >
+            Abbrechen
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Token holen
+    const token = localStorage.getItem('adminToken')
+    if (!token) {
+      window.location.href = '/admin/login.html'
+    }
+
+    // UI-Elemente referenzieren
+    const logoutBtn = document.getElementById('logoutBtn')
+    const successMessage = document.getElementById('successMessage')
+    const errorMessage = document.getElementById('errorMessage')
+    const productListView = document.getElementById('productListView')
+    const addProductView = document.getElementById('addProductView')
+    const addProductTab = document.getElementById('addProductTab')
+    const cancelFormBtn = document.getElementById('cancelFormBtn')
+    const productForm = document.getElementById('productForm')
+    const formTitle = document.getElementById('formTitle')
+    const productIdInput = document.getElementById('productId')
+    const submitBtnText = document.getElementById('submitBtnText')
+    const submitSpinner = document.getElementById('submitSpinner')
+    const imagePreviewContainer = document.getElementById(
+      'imagePreviewContainer'
+    )
+
+    // Event Listener
+    window.addEventListener('DOMContentLoaded', () => {
+      loadProducts()
+    })
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('adminToken')
+      window.location.href = '/admin/login.html'
+    })
+    addProductTab.addEventListener('click', showAddProductForm)
+    cancelFormBtn.addEventListener('click', showProductList)
+    productForm.addEventListener('submit', handleFormSubmit)
+    document.getElementById('images').addEventListener('change', previewImages)
+
+    // Produktliste anzeigen
+    async function loadProducts() {
+      clearMessages()
+      const tableBody = document.getElementById('productTableBody')
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+            <i class="fas fa-circle-notch fa-spin mr-2"></i> Produkte werden geladen...
+          </td>
+        </tr>
+      `
+      try {
+        const response = await fetch('/api/products', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        const data = await response.json()
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Fehler beim Laden')
+        }
+
+        if (data.products.length === 0) {
+          tableBody.innerHTML = `
+            <tr>
+              <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+                Keine Produkte gefunden.
+              </td>
+            </tr>
+          `
+          return
+        }
+
+        tableBody.innerHTML = ''
+        data.products.forEach((prod) => {
+          const row = document.createElement('tr')
+          row.innerHTML = `
+            <td class="px-6 py-4 whitespace-nowrap">
+              ${prod.images && prod.images.length > 0
+                ? `<img src="${prod.images[0]}" alt="${prod.name}" class="h-10 w-10 object-cover rounded">`
+                : '—'}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              ${prod.name}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              ${prod.price.toFixed(2)} €
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+              <button data-id="${prod._id}" class="edit-btn text-indigo-600 hover:text-indigo-900">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button data-id="${prod._id}" class="delete-btn text-red-600 hover:text-red-900">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          `
+          tableBody.appendChild(row)
+        })
+
+        // Event-Listener für Bearbeiten / Löschen
+        document.querySelectorAll('.edit-btn').forEach((btn) => {
+          btn.addEventListener('click', () => editProduct(btn.dataset.id))
+        })
+        document.querySelectorAll('.delete-btn').forEach((btn) => {
+          btn.addEventListener('click', () => deleteProduct(btn.dataset.id))
+        })
+      } catch (err) {
+        showError(err.message)
+      }
+    }
+
+    function showAddProductForm() {
+      clearMessages()
+      productListView.classList.add('hidden')
+      addProductView.classList.remove('hidden')
+      formTitle.textContent = 'Neues Produkt hinzufügen'
+      productForm.reset()
+      productIdInput.value = ''
+      submitBtnText.textContent = 'Produkt speichern'
+      submitSpinner.classList.add('hidden')
+      imagePreviewContainer.classList.add('hidden')
+      imagePreviewContainer.innerHTML = ''
+    }
+
+    function showProductList() {
+      clearMessages()
+      addProductView.classList.add('hidden')
+      productListView.classList.remove('hidden')
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault()
+      clearMessages()
+
+      // Button Loading
+      submitBtnText.textContent =
+        productIdInput.value === '' ? 'Speichern...' : 'Aktualisiere...'
+      submitSpinner.classList.remove('hidden')
+
+      // FormData sammeln
+      const name = document.getElementById('name').value
+      const price = document.getElementById('price').value
+      const description = document.getElementById('description').value
+      const slug = document.getElementById('slug').value
+
+      const imagesInput = document.getElementById('images')
+      const formData = new FormData()
+      formData.append('name', name)
+      formData.append('price', price)
+      formData.append('description', description)
+      formData.append('slug', slug)
+
+      for (let i = 0; i < imagesInput.files.length; i++) {
+        formData.append('images', imagesInput.files[i])
+      }
+
+      try {
+        let url = '/api/products'
+        let method = 'POST'
+
+        if (productIdInput.value !== '') {
+          url = `/api/products/${productIdInput.value}`
+          method = 'PUT'
+        }
+
+        const response = await fetch(url, {
+          method,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        })
+        const data = await response.json()
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Produkt konnte nicht gespeichert werden')
+        }
+
+        showSuccess(
+          productIdInput.value === ''
+            ? 'Produkt wurde erfolgreich erstellt.'
+            : 'Produkt wurde erfolgreich aktualisiert.'
+        )
+        showProductList()
+        loadProducts()
+      } catch (err) {
+        showError(err.message)
+      } finally {
+        submitBtnText.textContent =
+          productIdInput.value === '' ? 'Produkt speichern' : 'Änderungen speichern'
+        submitSpinner.classList.add('hidden')
+      }
+    }
+
+    async function editProduct(id) {
+      clearMessages()
+      try {
+        const response = await fetch(`/api/products/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        const data = await response.json()
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Produkt nicht gefunden')
+        }
+
+        showAddProductForm()
+        productIdInput.value = data.product._id
+        document.getElementById('name').value = data.product.name
+        document.getElementById('price').value = data.product.price
+        document.getElementById('description').value = data.product.description
+        document.getElementById('slug').value = data.product.slug
+
+        // Bilder in Vorschau anzeigen
+        if (data.product.images && data.product.images.length > 0) {
+          imagePreviewContainer.classList.remove('hidden')
+          imagePreviewContainer.innerHTML = ''
+          data.product.images.forEach((imgUrl) => {
+            const imgEl = document.createElement('img')
+            imgEl.src = imgUrl
+            imgEl.className = 'h-24 w-24 object-cover rounded border'
+            imagePreviewContainer.appendChild(imgEl)
+          })
+        }
+      } catch (err) {
+        showError(err.message)
+      }
+    }
+
+    async function deleteProduct(id) {
+      clearMessages()
+      if (!confirm('Möchten Sie dieses Produkt wirklich löschen?')) return
+
+      try {
+        const response = await fetch(`/api/products/${id}`, {
+          method: 'DELETE',
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        const data = await response.json()
+        if (!response.ok) {
+          throw new Error(data.message || 'Löschen fehlgeschlagen')
+        }
+        showSuccess('Produkt wurde erfolgreich gelöscht.')
+        loadProducts()
+      } catch (err) {
+        showError(err.message)
+      }
+    }
+
+    function previewImages(e) {
+      const files = e.target.files
+      imagePreviewContainer.innerHTML = ''
+      if (files.length === 0) {
+        imagePreviewContainer.classList.add('hidden')
+        return
+      }
+      imagePreviewContainer.classList.remove('hidden')
+      for (let i = 0; i < files.length; i++) {
+        if (!files[i].type.startsWith('image/')) continue
+        const reader = new FileReader()
+        reader.onload = function (evt) {
+          const imgEl = document.createElement('img')
+          imgEl.src = evt.target.result
+          imgEl.className = 'h-24 w-24 object-cover rounded border'
+          imagePreviewContainer.appendChild(imgEl)
+        }
+        reader.readAsDataURL(files[i])
+      }
+    }
+
+    function showSuccess(msg) {
+      successMessage.textContent = msg
+      successMessage.classList.remove('hidden')
+      setTimeout(() => successMessage.classList.add('hidden'), 5000)
+    }
+    function showError(msg) {
+      errorMessage.textContent = msg
+      errorMessage.classList.remove('hidden')
+      setTimeout(() => errorMessage.classList.add('hidden'), 5000)
+    }
+    function clearMessages() {
+      successMessage.classList.add('hidden')
+      errorMessage.classList.add('hidden')
+      successMessage.textContent = ''
+      errorMessage.textContent = ''
+    }
+  </script>
+</body>
+</html>

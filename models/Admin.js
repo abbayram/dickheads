@@ -1,31 +1,28 @@
+// models/Admin.js
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-// Admin-Schema
 const adminSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email:    { type: String, required: true, unique: true },
-  password: { type: String, required: true }, // Passwort wird gehasht
+  password: { type: String, required: true },
   createdAt:{ type: Date, default: Date.now }
 });
 
-// Pre-save Middleware zum Hashen des Passworts
-adminSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
-    return next();
-  }
-
+// Vor dem Speichern das Passwort (falls geändert) bei Bedarf hashen
+adminSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
   try {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
     next();
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 });
 
-// Methode zum Vergleichen von Passwörtern
-adminSchema.methods.comparePassword = async function (candidatePassword) {
+// Instanzmethode, um ein plaintext‐Passwort zu vergleichen
+adminSchema.methods.comparePassword = async function(candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
