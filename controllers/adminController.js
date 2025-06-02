@@ -3,64 +3,39 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Admin from '../models/Admin.js';
 
-// @desc    Admin registrieren
-// @route   POST /api/admin/register
-// @access  Public
-export const registerAdmin = async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
-
-    // Prüfen, ob Admin existiert
-    const existingAdmin = await Admin.findOne({ $or: [{ email }, { username }] });
-    if (existingAdmin) {
-      return res.status(400).json({ message: 'Benutzer oder E-Mail bereits vergeben' });
-    }
-
-    // Passwort hashen
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newAdmin = new Admin({
-      username,
-      email,
-      password: hashedPassword
-    });
-
-    await newAdmin.save();
-    res.status(201).json({ message: 'Admin erfolgreich registriert' });
-  } catch (error) {
-    res.status(500).json({ message: 'Serverfehler', error: error.message });
-  }
-};
-
-// @desc    Admin einloggen
-// @route   POST /api/admin/login
-// @access  Public
 export const loginAdmin = async (req, res) => {
   try {
+    // Wir erwarten im Body: { username: "...", password: "..." }
     const { username, password } = req.body;
 
-    // Admin per Username oder E-Mail suchen
+    // 1) Suche Admin in der DB
+    //    Wir erlauben sowohl Login via E-Mail als auch via Username
     const admin = await Admin.findOne({
-      $or: [{ email: username }, { username }]
+      $or: [
+        { email: username },      // falls der Nutzer seine E-Mail eingibt
+        { username: username }    // oder er gibt seinen Usernamen ein
+      ]
     });
     if (!admin) {
+      // Kein Admin mit dieser E-Mail/Username gefunden
       return res.status(401).json({ message: 'Ungültige Anmeldedaten' });
     }
 
-    // Passwort prüfen
-    const isPasswordValid = await bcrypt.compare(password, admin.password);
-    if (!isPasswordValid) {
+    // 2) Vergleiche eingegebenes Passwort mit dem Hash aus DB
+    const isMatch = await admin.comparePassword(password);
+    if (!isMatch) {
       return res.status(401).json({ message: 'Ungültige Anmeldedaten' });
     }
 
-    // Token generieren
+    // 3) Alles gut → Erstelle einen JWT
     const token = jwt.sign(
       { id: admin._id, username: admin.username },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
-    res.status(200).json({
+    // 4) Gib das Token und ein paar Basis‐Infos zurück
+    return res.status(200).json({
       message: 'Login erfolgreich',
       token,
       admin: {
@@ -70,6 +45,7 @@ export const loginAdmin = async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(500).json({ message: 'Serverfehler', error: error.message });
+    console.error('Login Error:', error);
+    return res.status(500).json({ message: 'Serverfehler', error: error.message });
   }
 };

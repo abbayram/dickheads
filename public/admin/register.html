@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registrierung</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-md w-96">
+            <div class="text-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-800">Admin Registrierung</h1>
+                <p class="text-gray-600 mt-2">Erstellen Sie einen neuen Admin-Account</p>
+            </div>
+            
+            <div id="successMessage" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4"></div>
+            <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"></div>
+            
+            <form id="registerForm" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700">Benutzername</label>
+                    <input type="text" id="username" name="username" required 
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">E-Mail</label>
+                    <input type="email" id="email" name="email" required 
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Passwort</label>
+                    <input type="password" id="password" name="password" required minlength="6"
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                
+                <div>
+                    <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Passwort bestätigen</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6"
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                
+                <div>
+                    <button type="submit" 
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span id="registerText">Registrieren</span>
+                        <span id="registerSpinner" class="hidden ml-2">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                        </span>
+                    </button>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="/admin/login.html" class="text-sm text-indigo-600 hover:text-indigo-500">
+                        Zurück zum Login
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // UI-Elemente referenzieren
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const registerText = document.getElementById('registerText');
+            const registerSpinner = document.getElementById('registerSpinner');
+            
+            // Nachrichten zurücksetzen
+            successMessage.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            
+            // Passwörter überprüfen
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'Die Passwörter stimmen nicht überein.';
+                errorMessage.classList.remove('hidden');
+                return;
+            }
+            
+            // Button auf Ladeanimation umstellen
+            registerText.textContent = 'Registrierung läuft...';
+            registerSpinner.classList.remove('hidden');
+            
+            // Formulardaten sammeln
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            
+            try {
+                const response = await fetch('/api/admin/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Erfolgreiche Registrierung
+                    successMessage.textContent = 'Admin-Account erfolgreich erstellt. Sie können sich jetzt einloggen.';
+                    successMessage.classList.remove('hidden');
+                    
+                    // Formular zurücksetzen
+                    document.getElementById('registerForm').reset();
+                    
+                    // Nach 3 Sekunden zur Login-Seite weiterleiten
+                    setTimeout(() => {
+                        window.location.href = '/admin/login.html';
+                    }, 3000);
+                } else {
+                    // Fehlerbehandlung
+                    errorMessage.textContent = data.message || 'Registrierung fehlgeschlagen';
+                    errorMessage.classList.remove('hidden');
+                }
+            } catch (error) {
+                // Netzwerk- oder sonstige Fehler
+                errorMessage.textContent = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
+                errorMessage.classList.remove('hidden');
+            } finally {
+                // Button zurücksetzen
+                registerText.textContent = 'Registrieren';
+                registerSpinner.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
